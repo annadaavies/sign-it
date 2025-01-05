@@ -1,0 +1,4 @@
+numpy #For any of the neural network files (e.g. neural_network_final_spiral_data.py)
+os #For data_formatting.py to access files for training. This is a temporary requirement as only needed on the laptop that will train the model (for which the specific user path will be adjusted to) 
+matplotlib.pyplot #For data_formatting.py to visualise file formatting. Not technically required (only helpful as visualisation tool) and, if so, temporary.
+opencv-python==4.10.0.84 #For data_formatting.py and open_cv_frame_capture.py
