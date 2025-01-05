@@ -122,7 +122,7 @@ Listed below are all installments **required** to run the code. Optional additio
 
 The image below shows how, on a set of randomly generated spiral data, the neural network outputs updates on accuracy, loss, and learning rate as it increments its steps (epochs) through training data. 
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Python_logo_and_wordmark.svg/972px-Python_logo_and_wordmark.svg.png" alt="Python" width="180" height="55">
+<img src="images/training.png" alt="Training" width="180" height="55">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -131,12 +131,12 @@ The image below shows how, on a set of randomly generated spiral data, the neura
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Neural Network 
-    - [ ] Neural Network Layer Classes
-    - [ ] Neural Network Activation Classes
-    - [ ] Neural Network Loss Classes
-    - [ ] Neural Network Optimiser Classes
-    - [ ] Neural Network Model Class
+- [x] Neural Network 
+    - [x] Neural Network Layer Classes
+    - [x] Neural Network Activation Classes
+    - [x] Neural Network Loss Classes
+    - [x] Neural Network Optimiser Classes
+    - [x] Neural Network Model Class
 - [ ] Dataset Mass Formatting
 - [ ] Neural Network Model Training
 - [ ] OpenCV Image Formatting
@@ -150,18 +150,15 @@ The image below shows how, on a set of randomly generated spiral data, the neura
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
-
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+Anna Davies - adavies@kellettschool.com
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []()
+* [othneildrew's README.md Template](https://github.com/othneildrew/Best-README-Template/tree/main)
 * []()
 * []()
 
