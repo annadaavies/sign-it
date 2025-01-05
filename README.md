@@ -122,7 +122,7 @@ Listed below are all installments **required** to run the code. Optional additio
 
 The image below shows how, on a set of randomly generated spiral data, the neural network outputs updates on accuracy, loss, and learning rate as it increments its steps (epochs) through training data. 
 
-<img src="images/training.png" alt="Training" width="180" height="55">
+<img src="images/training.png" alt="Training" width="700" height="180">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
