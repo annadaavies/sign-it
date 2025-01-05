@@ -98,24 +98,18 @@ Listed below are all installments **required** to run the code. Optional additio
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+2. Clone the repository
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/annadaavies/NEA_project
    ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
-5. Change git remote url to avoid accidental pushes to base project
+3. Install prerequisite packages as written above
+4. Change git remote url to avoid accidental pushes to base project
    ```sh
    git remote set-url origin github_username/repo_name
    git remote -v # confirm the changes
    ```
+5. Run the 'neural_network_final_spiral_data.py' file (Neural Network --> Version 2 (numpy) --> neural_network_final_spiral_data.py')
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -124,9 +118,11 @@ Listed below are all installments **required** to run the code. Optional additio
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+@ChrisHallHK - As noted at the top of the 'neural_network_final_spiral_data.py' file, I am currently working on formatting my kaggle data set (87,000 images!) such that I can train my final model once we return to school on a school computer. The spiral_data() function is not my own code. It is temporary so that you are able to run the program with a random set of neural network data and see that it is able to adjust learning rate, improve accuracy, and decrease loss. 
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+The image below shows how, on a set of randomly generated spiral data, the neural network outputs updates on accuracy, loss, and learning rate as it increments its steps (epochs) through training data. 
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Python_logo_and_wordmark.svg/972px-Python_logo_and_wordmark.svg.png" alt="Python" width="180" height="55">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -135,48 +131,20 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
-
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+- [ ] Neural Network 
+    - [ ] Neural Network Layer Classes
+    - [ ] Neural Network Activation Classes
+    - [ ] Neural Network Loss Classes
+    - [ ] Neural Network Optimiser Classes
+    - [ ] Neural Network Model Class
+- [ ] Dataset Mass Formatting
+- [ ] Neural Network Model Training
+- [ ] OpenCV Image Formatting
+- [ ] Dictionary Conversion
+- [ ] GUI Interface
+     
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-### Top contributors:
-
-<a href="https://github.com/github_username/repo_name/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=github_username/repo_name" alt="contrib.rocks image" />
-</a>
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the project_license. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- CONTACT -->
