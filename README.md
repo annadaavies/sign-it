@@ -57,7 +57,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<!--[![Product Name Screen Shot][product-screenshot]](https://example.com)-->
 
 According to the World Health Organisation (WHO), currently more than 1.5 billion people (representing approximately 20% of the global population) live with hearing loss. This number is predicted to rise to 2.5 billion by 2050. The deaf and hard of hearing community primarily use a local form of sign language to communicate between themselves. However, with the exception of those individuals and their close friends and family members, most people do not know sign language. This makes communication difficult between hearing and hard of hearing individuals in the broader community. Current workarounds such as writing out or typing text are slow and cumbersome. They interrupt the natural flow of conversation and cause frustration. As researched and presented below, there are very few efficient real-time sign language translation apps available which could lower this communication barrier. 
 
