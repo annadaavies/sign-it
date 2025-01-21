@@ -124,7 +124,7 @@ The image below shows how, on a set of randomly generated spiral data, the neura
   - [x] Neural Network Loss Classes
   - [x] Neural Network Optimiser Classes
   - [x] Neural Network Model Class
-- [ ] Dataset Mass Formatting
+- [x] Dataset Mass Formatting
 - [ ] Neural Network Model Training
 - [ ] OpenCV Image Formatting
 - [ ] Dictionary Conversion
