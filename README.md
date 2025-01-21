@@ -1,6 +1,5 @@
 <a id="readme-top"></a>
 
-
 <!-- PROJECT SHIELDS -->
 <!--
 *** I'm using markdown "reference style" links for readability.
@@ -9,8 +8,6 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-
-
 
 <!-- PROJECT LOGO -->
 <br />
@@ -25,8 +22,6 @@
     A Bidirectional Sign Language Translation App 
   </p>
 </div>
-
-
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -52,46 +47,41 @@
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 <!--[![Product Name Screen Shot][product-screenshot]](https://example.com)-->
 
-According to the World Health Organisation (WHO), currently more than 1.5 billion people (representing approximately 20% of the global population) live with hearing loss. This number is predicted to rise to 2.5 billion by 2050. The deaf and hard of hearing community primarily use a local form of sign language to communicate between themselves. However, with the exception of those individuals and their close friends and family members, most people do not know sign language. This makes communication difficult between hearing and hard of hearing individuals in the broader community. Current workarounds such as writing out or typing text are slow and cumbersome. They interrupt the natural flow of conversation and cause frustration. As researched and presented below, there are very few efficient real-time sign language translation apps available which could lower this communication barrier. 
+According to the World Health Organisation (WHO), currently more than 1.5 billion people (representing approximately 20% of the global population) live with hearing loss. This number is predicted to rise to 2.5 billion by 2050. The deaf and hard of hearing community primarily use a local form of sign language to communicate between themselves. However, with the exception of those individuals and their close friends and family members, most people do not know sign language. This makes communication difficult between hearing and hard of hearing individuals in the broader community. Current workarounds such as writing out or typing text are slow and cumbersome. They interrupt the natural flow of conversation and cause frustration. As researched and presented below, there are very few efficient real-time sign language translation apps available which could lower this communication barrier.
 
-To facilitate improved communication between hearing and hard of hearing individuals, I propose to develop an application that supports two-way translation between American sign language and the English spoken language. Using the built-in phone webcam, hearing impaired users will be able to sign a series of finger-spelt characters that are processed in real-time into English text on a screen. Hearing users will communicate by inputting text or speech that will be converted into sign language gestures performed by a virtual avatar. This project ultimately aims to provide a communication platform between the hearing and the hearing impaired, where everyone is able to communicate in the manner that comes most naturally to them. 
-
+To facilitate improved communication between hearing and hard of hearing individuals, I propose to develop an application that supports two-way translation between American sign language and the English spoken language. Using the built-in phone webcam, hearing impaired users will be able to sign a series of finger-spelt characters that are processed in real-time into English text on a screen. Hearing users will communicate by inputting text or speech that will be converted into sign language gestures performed by a virtual avatar. This project ultimately aims to provide a communication platform between the hearing and the hearing impaired, where everyone is able to communicate in the manner that comes most naturally to them.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 ### Built With
 
-* <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Python_logo_and_wordmark.svg/972px-Python_logo_and_wordmark.svg.png" alt="Python" width="180" height="55">
-* <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/NumPy_logo_2020.svg/1024px-NumPy_logo_2020.svg.png" alt="Numpy" width="200" height="90">
-* <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/OpenCV_logo_black.svg/360px-OpenCV_logo_black.svg.png" alt="OpenCV" width="100" height="100">
-
+- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Python_logo_and_wordmark.svg/972px-Python_logo_and_wordmark.svg.png" alt="Python" width="180" height="55">
+- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/NumPy_logo_2020.svg/1024px-NumPy_logo_2020.svg.png" alt="Numpy" width="200" height="90">
+- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/OpenCV_logo_black.svg/360px-OpenCV_logo_black.svg.png" alt="OpenCV" width="100" height="100">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
-Detailed below are the instructions for executing the application. 
+Detailed below are the instructions for executing the application.
 
 ### Prerequisites
 
-Listed below are all installments **required** to run the code. Optional additions - mainly to aid visualisation of neural network and image processing components - are detailed in the requirements.txt file. 
+Listed below are all installments **required** to run the code. Optional additions - mainly to aid visualisation of neural network and image processing components - are detailed in the requirements.txt file.
 
-* Numpy
+- Numpy
   ```sh
   pip3 install numpy
   ```
-* OpenCV
+- OpenCV
   ```sh
   pip3 install opencv-python
   ```
@@ -110,69 +100,63 @@ Listed below are all installments **required** to run the code. Optional additio
    ```
 5. Run the 'neural_network_final_spiral_data.py' file (Neural Network --> Version 2 (numpy) --> neural_network_final_spiral_data.py')
 
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- USAGE EXAMPLES -->
+
 ## Usage
 
-@ChrisHallHK - As noted at the top of the 'neural_network_final_spiral_data.py' file, I am currently working on formatting my kaggle data set (87,000 images!) such that I can train my final model once we return to school on a school computer. The spiral_data() function is not my own code. It is temporary so that you are able to run the program with a random set of neural network data and see that it is able to adjust learning rate, improve accuracy, and decrease loss. 
+@ChrisHallHK - As noted at the top of the 'neural_network_final_spiral_data.py' file, I am currently working on formatting my kaggle data set (87,000 images!) such that I can train my final model once we return to school on a school computer. The spiral_data() function is not my own code. It is temporary so that you are able to run the program with a random set of neural network data and see that it is able to adjust learning rate, improve accuracy, and decrease loss.
 
-The image below shows how, on a set of randomly generated spiral data, the neural network outputs updates on accuracy, loss, and learning rate as it increments its steps (epochs) through training data. 
+The image below shows how, on a set of randomly generated spiral data, the neural network outputs updates on accuracy, loss, and learning rate as it increments its steps (epochs) through training data.
 
 <img src="images/training.png" alt="Training" width="700" height="180">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- ROADMAP -->
+
 ## Roadmap
 
-- [x] Neural Network 
-    - [x] Neural Network Layer Classes
-    - [x] Neural Network Activation Classes
-    - [x] Neural Network Loss Classes
-    - [x] Neural Network Optimiser Classes
-    - [x] Neural Network Model Class
+- [x] Neural Network
+  - [x] Neural Network Layer Classes
+  - [x] Neural Network Activation Classes
+  - [x] Neural Network Loss Classes
+  - [x] Neural Network Optimiser Classes
+  - [x] Neural Network Model Class
 - [ ] Dataset Mass Formatting
 - [ ] Neural Network Model Training
 - [ ] OpenCV Image Formatting
 - [ ] Dictionary Conversion
 - [ ] GUI Interface
-     
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 <!-- CONTACT -->
+
 ## Contact
 
 Anna Davies - adavies@kellettschool.com
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 <!-- ACKNOWLEDGMENTS -->
+
 ## Acknowledgments
 
-* [othneildrew's README.md Template](https://github.com/othneildrew/Best-README-Template/tree/main)
-* []()
-* []()
+- [othneildrew's README.md Template](https://github.com/othneildrew/Best-README-Template/tree/main)
+- []()
+- []()
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [product-screenshot]: images/screenshot.png
 [Python]: <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Python_logo_and_wordmark.svg/972px-Python_logo_and_wordmark.svg.png" alt="Python" width="200" height="70">
-[Python-url]: https://docs.python.org/3/ 
+[Python-url]: https://docs.python.org/3/
 [Numpy]: https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/NumPy_logo_2020.svg/1024px-NumPy_logo_2020.svg.png
 [Numpy-url]: https://numpy.org/doc/
 [OpenCV]: https://miro.medium.com/v2/resize:fit:2000/format:webp/1*S8Il5ethl3YFh0M9XKVz-A.png
 [OpenCV-url]: https://docs.opencv.org/4.x/index.html
-

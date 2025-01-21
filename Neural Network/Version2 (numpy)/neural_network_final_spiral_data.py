@@ -775,6 +775,7 @@ class RegressionAccuracy(Accuracy):
     def compare(self, predicted_values, true_prediction_values): 
         return numpy.absolute(predicted_values - true_prediction_values) < self.precision
 
+
 class CategoricalAccuracy(Accuracy): 
     def __init__(self, binary=False): 
         self.binary = binary
@@ -787,7 +788,6 @@ class CategoricalAccuracy(Accuracy):
         if not self.binary and len(true_prediction_values.shape) == 2: 
             true_prediction_values = numpy.argmax(true_prediction_values, axis=1)
         return predicted_values == true_prediction_values
-
 
 
 class Model: 
