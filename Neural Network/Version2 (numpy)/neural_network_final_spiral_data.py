@@ -1,6 +1,21 @@
 import numpy
 
-#NOTE: The spiral_data function below is NOT my own code. I am having difficulties formatting my data set and, due to volume of data, need to train my final model on a school computer (discussed with Mr. Davies prior to X-MAS break). Therefore, as a temporary filler to show my neural network code works as intended in training a randomly generated set of spiral data, I have taken code available online to generate this. 
+"""
+EPOCHS = 10 
+BATCH_SIZE = 128 
+
+steps = X.shape[0] // BATCH_SIZE
+
+if steps * BATCH_SIZE < X.shape[0]: 
+    steps += 1
+
+for epoch in range(EPOCHS): 
+    for step in range(steps): #During each step in each epoch, you are taking a slice of training data. 
+        batch_X = X[step]
+
+"""
+
+'''
 def spiral_data(samples, classes):
 
     input_data = numpy.zeros((samples, 2), dtype=numpy.float32)
@@ -23,6 +38,7 @@ def spiral_data(samples, classes):
         labels[start_index:end_index] = class_num  
 
     return input_data, labels
+'''
 
 #NB: When referring to dimensions of matrices in the documented code below, I will use (r, c) where the first parameter is the number of rows, and the second the number of columns. The most common notation of this type is (number of samples, number of neurons) as, typically, a matrix in a neural network will have the same number of rows as the samples, and the same number of columns as neurons to store the state of each neuron for every sample. 
 
@@ -289,10 +305,32 @@ class Loss:
         sample_losses = self.forward_pass(output, true_prediction_values) #The forward pass is called to make sample_losses, which is a 1D array where each value in the array is the log confidence value for a sample. 
         data_loss = numpy.mean(sample_losses) #This finds the mean loss value for all the samples. 
         
+        self.accumulated_sum += numpy.sum(sample_losses) #Need to add this to calculate the sample-wise average. Mathematically, you can just sum the losses from all epoch batches and counts to calculate the mean value at the end of each epoch. 
+        self.accumulated_count += len(sample_losses) 
+
         if not regularisation: 
             return data_loss
         
         return data_loss, self.regularisation_loss()
+    
+    def calculate_accumulated_mean(self, regularisation=False): 
+        """
+        FILL IN - Need a method that calculates mean at any point in the training of the neural network (e.g. could be between epochs). 
+        
+        """
+
+        data_loss = self.accumulated_sum / self.accumulated_count 
+        
+        if not regularisation: 
+            return data_loss
+        
+        return data_loss, self.regularisation_loss() #Regularisation loss does not need to be accumulated as it's calculated from the current state of layer parameters. 
+    
+    def reset_epoch(self): #This method is to reset variables for accumulated loss each time you start a new epoch (i.e. each time you pass through the training data again). 
+        self.accumulated_sum = 0 
+        self.accumulated_count = 0
+
+
 
 class CategoricalCrossEntropyLoss(Loss): 
     """Categorical cross-entrop loss function. A child class of the Loss parent class"""
@@ -762,7 +800,21 @@ class Accuracy:
         comparisons = self.compare(predicted_values, true_prediction_values) 
         
         accuracy = numpy.mean(comparisons)
+
+        self.accumulated_sum += numpy.sum(comparisons) 
+        self.accumulated_count += len(comparisons) 
+
         return accuracy 
+    
+    def calculate_accumulated(self): 
+
+        accuracy = self.accumulated_sum / self.accumulated_count 
+
+        return accuracy 
+    
+    def reset_epoch(self): 
+        self.accumulated_sum = 0 
+        self.accumulated_count = 0 
     
 class RegressionAccuracy(Accuracy): 
     def __init__(self): 

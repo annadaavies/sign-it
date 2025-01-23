@@ -50,6 +50,7 @@ print(keys[:10])
 plt.imshow((images[8].reshape(96,96)))
 plt.show()
 print(target_labels[8])
+print("done2")
 
 #images = images[keys]
 #target_labels = target_labels[keys]
