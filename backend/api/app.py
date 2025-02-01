@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from neural_network.load_and_predict import load_and_predict
-from translation.translator import translate_sentence
+from translation.translator import Translator
 
 app = Flask(__name__)
 CORS(app)
@@ -25,7 +25,8 @@ def translate():
         data = request.get_json()
         text = data.get('text', '')
         
-        translation_sequence = translate_sentence(text) 
+        translator = Translator()
+        translation_sequence = translator.translate_sentence(text) 
         
         return jsonify({'signs': translation_sequence})
         
