@@ -13,7 +13,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/github_annadaavies/NEA_project">
-    <img src="frontend/src/assets/images/logo.png" alt="Logo" width="200" height="200">
+    <img src="frontend/public/logo.png" alt="Logo" width="200" height="200">
   </a>
 
 <h3 align="center">SignIt</h3>
