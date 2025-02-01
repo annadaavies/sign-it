@@ -26,12 +26,12 @@ class Layer:
         Args:
         number_inputs (int): The number of input features to the layer.
         number_neurons (int): The number of neurons in the layer.
-        weight_regulariser_l1 (float): L1 regularisation faactor for the weight parameters.
+        weight_regulariser_l1 (float): L1 regularisation factor for the weight parameters.
         weight_regulariser_l2 (float): L2 regularisation factor for the weight parameters.
         bias_regulariser_l1 (float): L1 regularisation factor for the bias parameters.
         bias_regulariser_l2 (float): L2 regularisation factor for the bias parameters. 
         """
-
+        #TODO: Set seed to control random initialisation. NOTE: In general, anywhere numpy.random.randn is done, set a seed. Set to 0. 
         self.weights = 0.01 * numpy.random.randn(number_inputs, number_neurons) #The weight initialisation factor can be 0.1 or 0.01. See Glorot uniform distribution note from Keras devs. 
         self.biases = numpy.zeros((1, number_neurons)) 
         
@@ -118,7 +118,7 @@ class InputLayer:
 
 class DropoutLayer:
     """
-    Regularisatin layer that randommly zeros inputs during training. 
+    Regularisation layer that randomly zeros inputs during training. 
     
     Implements dropout regularisation by randomly masking a fraction of inputs during forward propagation and scaling output during training.
     """

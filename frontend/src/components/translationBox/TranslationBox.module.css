@@ -1,0 +1,111 @@
+.translationBox {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.predictionArea {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.wordBox {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  border: 2px solid #dee2e6;
+}
+
+.predictedText {
+  font-size: 2rem;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: #212529;
+  flex: 1;
+}
+
+.deleteButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #dc3545;
+  padding: 0.5rem;
+}
+
+.addButton {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.addButton:hover {
+  background: #218838;
+  transform: translateY(-1px);
+}
+
+.addButton:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}
+
+.sentenceArea {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.sentence {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.sentenceWord {
+  background: #e9ecef;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.englishInput {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.textInput {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.translateButton {
+  width: 100%;
+  background: #1a73e8;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.translateButton:hover {
+  background: #1557b0;
+  transform: translateY(-1px);
+}

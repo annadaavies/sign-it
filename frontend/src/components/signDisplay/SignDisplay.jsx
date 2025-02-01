@@ -27,7 +27,8 @@ const SignDisplay = ({ signs }) => {
         </div>
       ) : (
         <div className={styles.placeholder}>
-          Translated signs will appear here
+          <p>Your translated signs will appear here</p>
+          <small>Example: Try typing "Hello world"</small>
         </div>
       )}
     </div>
