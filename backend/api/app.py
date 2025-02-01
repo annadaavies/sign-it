@@ -27,9 +27,7 @@ def translate():
         
         translation_sequence = translate_sentence(text) 
         
-        return jsonify({
-            'signs': translation_sequence
-        })
+        return jsonify({'signs': translation_sequence})
         
     except Exception: 
         return jsonify({'error': str(Exception)}), 500
