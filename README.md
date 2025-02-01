@@ -109,7 +109,7 @@ Listed below are all installments **required** to run the code. Optional additio
 ## Usage
 
 1. To run any frontend files:
-    ```sh
+```sh
   cd frontend
   npm install react-webcam axios
   npm start
