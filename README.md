@@ -88,17 +88,19 @@ Listed below are all installments **required** to run the code. Optional additio
 
 ### Installation
 
-2. Clone the repository
+1. Clone the repository
    ```sh
    git clone https://github.com/annadaavies/NEA_project
    ```
-3. Install prerequisite packages as written above
+2. Install prerequisite packages as written above
+   ```sh
+   pip install -r requirements.txt
+   ```
 4. Change git remote url to avoid accidental pushes to base project
    ```sh
    git remote set-url origin github_username/repo_name
    git remote -v # confirm the changes
    ```
-5. Run the 'neural_network_final_spiral_data.py' file (Neural Network --> Version 2 (numpy) --> neural_network_final_spiral_data.py')
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -106,11 +108,17 @@ Listed below are all installments **required** to run the code. Optional additio
 
 ## Usage
 
-@ChrisHallHK - As noted at the top of the 'neural_network_final_spiral_data.py' file, I am currently working on formatting my kaggle data set (87,000 images!) such that I can train my final model once we return to school on a school computer. The spiral_data() function is not my own code. It is temporary so that you are able to run the program with a random set of neural network data and see that it is able to adjust learning rate, improve accuracy, and decrease loss.
-
-The image below shows how, on a set of randomly generated spiral data, the neural network outputs updates on accuracy, loss, and learning rate as it increments its steps (epochs) through training data.
-
-<img src="images/training.png" alt="Training" width="700" height="180">
+1. To run any frontend files:
+    ```sh
+  cd frontend
+  npm install react-webcam axios
+  npm start
+   ```
+2. To run any backend files:
+  ```sh
+  cd backend/api
+  python app.py
+  ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
