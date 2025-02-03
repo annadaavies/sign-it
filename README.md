@@ -96,7 +96,7 @@ Listed below are all installments **required** to run the code. Optional additio
    ```sh
    pip install -r requirements.txt
    ```
-4. Change git remote url to avoid accidental pushes to base project
+3. Change git remote url to avoid accidental pushes to base project
    ```sh
    git remote set-url origin github_username/repo_name
    git remote -v # confirm the changes
@@ -109,16 +109,19 @@ Listed below are all installments **required** to run the code. Optional additio
 ## Usage
 
 1. To run any frontend files:
+
 ```sh
   cd frontend
   npm install react-webcam axios
   npm start
-   ```
+```
+
 2. To run any backend files:
-  ```sh
-  cd backend/api
-  python app.py
-  ```
+
+```sh
+cd backend/api
+python app.py
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

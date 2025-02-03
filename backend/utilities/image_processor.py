@@ -1,0 +1,1 @@
+#Should take image file from app.py and process in same way as training data in neural network is preprocessed. 
