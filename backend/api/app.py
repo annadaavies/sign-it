@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-from neural_network.load_and_predict import load_and_predict
+from backend.utilities.load_and_predict import load_and_predict
 from translation.translator import Translator
 
 app = Flask(__name__)
@@ -11,10 +11,7 @@ CORS(app)
 def predict():
     try: 
         image_file = request.files['image']
-        image_bytes = image
-        #preprocess function needs to be used here to convert to appropriate format. 
-        #prediction function then should be called. 
-        prediction = 'A' #arbitrary value for now to test interface. 
+        #need to connect prediction stuff here.  
         return jsonify({'letter': prediction})
     
     except Exception: 
