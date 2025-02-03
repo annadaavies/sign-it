@@ -64,6 +64,8 @@ To facilitate improved communication between hearing and hard of hearing individ
 - <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Python_logo_and_wordmark.svg/972px-Python_logo_and_wordmark.svg.png" alt="Python" width="180" height="55">
 - <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/NumPy_logo_2020.svg/1024px-NumPy_logo_2020.svg.png" alt="Numpy" width="200" height="90">
 - <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/OpenCV_logo_black.svg/360px-OpenCV_logo_black.svg.png" alt="OpenCV" width="100" height="100">
+- <img src="https://static-00.iconduck.com/assets.00/react-original-wordmark-icon-840x1024-vhmauxp6.png" alt="React" width="100" height="100">
+- <img src="https://static-00.iconduck.com/assets.00/flask-icon-1594x2048-84mjydzf.png" alt="Flask" width="100" height="100">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
