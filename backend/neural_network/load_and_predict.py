@@ -62,10 +62,11 @@ def load_and_predict(model_name: str, image_data) -> str:
     
     return prediction
     
+"""
 if __name__ == "__main__": 
     image_data = process_image("C_test.png")
     print(load_and_predict("asl.model", image_data))
-
+"""
 
 """
 DISPLAYING IMAGES TESTING: 
