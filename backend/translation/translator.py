@@ -1,37 +1,32 @@
+from .gloss_parser import GlossParser
+from .dictionary import Dictionary
+
+
 class Translator: 
     
     def __init__(self): 
-        self.word_mappings = self.load_mappings()
+        self.dictionary = Dictionary()
+        self.dictionary.load_from_file('backend/translation/mappings.txt')
+        self.parser = GlossParser()
         
-        def load_mappings(self): 
-            #Load from file. Use custom built dictionary class. 
-            pass
-
-        def translate_word(self, word): 
-            #get here is a dictionary built-in function, needs to be implemented with own dictionary class. 
-            return self.word_mappings.get(word.lower(), None)
+        def translate_sentence(self, text): 
+            processing_queue = self.parser.parse(text) 
+            translation_sequence = self.process_queue(processing_queue)
+            
+            return translation_sequence
         
-        def translate_sentence(self, gloss_sentence): 
-            #gloss_sentence should already be a list of words in correct order. 
-            #NOTE: Should also add some sort of space sign in between words. 
-            #NOTE: All uses of dictionaries need to be replaced with dicionary built from scratch. 
-            #NOTE: Could replace for letter in word with some sort of queue process? 
-            translated_sequence = []
-            
-            for word in gloss_sentence: 
-                translation = self.translate_word(word)
-                if translation: 
-                    translated_sequence.append({
-                        'type': 'video' if translation.endswith('.mp4') else 'image', 
-                        'value': translation, 
-                        'label': word
-                    })
-                else: 
-                    for letter in word: 
-                        translated_sequence.append({
-                            'type': 'image',
-                            'value': f'{letter.lower()}.jpg',
-                            'label': letter
-                        })
-            
-            return translated_sequence
+        def process_queue(self, queue): 
+            sequence = []
+            while not queue.is_empty(): 
+                item_type, value = queue.dequeue()
+                
+                if item_type == 'word': 
+                    sequence.append(self.create_word_entry(value))
+                elif item_type == 'letter':
+                    sequence.append(self.create_letter_entry(value))
+                elif item_type == 'compound-end': 
+                    sequence.append(self.create_compound_marker(value))
+                elif item_type == 'pause': 
+                    sequence.append({'type': 'pause', 'duration': value})
+                    
+                return sequence

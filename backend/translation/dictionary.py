@@ -100,7 +100,25 @@ class Dictionary:
         
         return None
     
-    def contain_check(self, key: str) -> bool: 
+    def remove(self, key): 
+        #TODO: Docstring this ANNA!!!
+        index = self.hash(key) 
+        current = self.table[index]
+        
+        previous = None
+        while current: 
+            if current.key == key: 
+                if previous: 
+                    previous.next = current.next
+                else: 
+                    self.table[index] = current.next
+                self.count -= 1
+                
+            previous = current
+            current = current.next
+        return False
+    
+    def in_dict(self, key: str) -> bool: 
         """
         Check if a key-value pair exists in the dictionary based on the key. 
         
