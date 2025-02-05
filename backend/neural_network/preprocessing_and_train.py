@@ -4,7 +4,7 @@ import cv2
 import numpy
 
 #Lots of unorganised preprocessing thoughts and attempts here. This file needs to eventually be where all data preprocessing is done, the train function of the model is called, and the trained model is saved. 
-IMAGE_PATH = "/Users/anna/desktop/school/A LEVEL - ANNA/COMPUTER SCIENCE/NEA/backend/neural_network/asl_images"
+DIRECTORY_PATH = "/Users/anna/desktop/school/A LEVEL - ANNA/COMPUTER SCIENCE/NEA/backend/neural_network/asl_images"
 
 
 def load_dataset(dataset, path): 
@@ -41,7 +41,7 @@ def create_dataset(path):
     return images, target_labels, test_images, test_target_labels
 
 
-images, target_labels, test_images, test_target_labels = create_dataset(IMAGE_PATH)
+images, target_labels, test_images, test_target_labels = create_dataset(DIRECTORY_PATH)
 
 # Data must be shuffled otherwise, in the ordered version of the training data, the model will keep getting very good at predicting a singular label, then the next, but never all at once. Therefore, shuffling data is used to prevent the model from becoming biased towards any single class.
 keys = numpy.array(range(images.shape[0]))

@@ -67,19 +67,17 @@ class Dictionary:
         
         if self.table[index] is None: #Simplest case: the hash index is empty and key-value pair can be inserted. 
             self.table[index] = new_entry
+        
         else: 
             current = self.table[index] 
-            
             while current.next: #While the next place in the dictionary is empty. 
-                if current.key == key: #If a key-value pair with the exact same key already exists in the dictionary, it will just update the value of that key-value pair. 
-                    current.value = value 
+                if current.key ==  key: #If a key-value pair with the exact same key already exists in the dictionary, it will just update the value of that key-value pair. 
+                    current.value = value
                     return 
-                current = current.next 
-        
+                current = current.next
             current.next = new_entry
-        
         self.count += 1
-        
+            
     def get(self, key: str) -> any: 
         """
         Retrieve value associated with a key. 
@@ -101,7 +99,7 @@ class Dictionary:
         return None
     
     def remove(self, key): 
-        #TODO: Docstring this ANNA!!!
+        #TODO: Remember to finish this docstring!!!!!!!
         index = self.hash(key) 
         current = self.table[index]
         
@@ -161,5 +159,19 @@ class Dictionary:
             raise FileNotFoundError("Error: File not found.")
 
 
-
-
+    def serialise(self): 
+        
+        result = []
+        for entry in self.table: 
+            current = entry 
+            while current: 
+                if isinstance(current.value, Dictionary): 
+                    result.append(current.value.serialise())
+                else: 
+                    result.append({
+                        'key': current.key,
+                        'value': current.value
+                    })
+                current = current.nexts
+        return result
+        

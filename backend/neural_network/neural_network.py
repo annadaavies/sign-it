@@ -111,7 +111,7 @@ class Layer:
 
 
 class InputLayer:
-
+    #NOTE: Need to docstring this class!!!
     def forward_pass(self, inputs, training):
         self.output = inputs
 

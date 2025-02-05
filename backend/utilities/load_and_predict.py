@@ -3,6 +3,8 @@ import numpy
 import cv2
 from matplotlib import pyplot as plt
 
+DIRECTORY_PATH = "/Users/anna/desktop/school/A LEVEL - ANNA/COMPUTER SCIENCE/NEA"
+
 def process_image(image_path: str): 
     
     image = cv2.imread(image_path)

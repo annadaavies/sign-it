@@ -1,21 +1,31 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-from backend.utilities.load_and_predict import load_and_predict
+from backend.utilities.load_and_predict import *
 from translation.translator import Translator
 
 app = Flask(__name__)
 CORS(app)
+translator = Translator()
 
 @app.route('/api/predict', methods=['POST'])
 def predict():
     try: 
+        if 'image' not in request.files: 
+            return jsonify({'Error': 'No image provided.'}), 400
+        
         image_file = request.files['image']
-        #need to connect prediction stuff here.  
+        temp_file_path = f"/temp/{image_file.filename}"
+        image_file.save(temp_file_path)
+        
+        processed_image = process_image(temp_file_path)
+        prediction = load_and_predict(processed_image)
+         
         return jsonify({'letter': prediction})
     
     except Exception: 
-        return jsonify({'error': str(Exception)}), 500
+        app.logger.error(f"Prediction error: {str(Exception)}")
+        return jsonify({'Error': 'Server error'}), 500
 
 
 @app.route('/api/translate', methods=['POST'])
@@ -25,9 +35,9 @@ def translate():
         text = data.get('text', '')
         
         translator = Translator()
-        translation_sequence = translator.translate_sentence(text) 
-        
-        return jsonify({'signs': translation_sequence})
+        translation_dict = translator.translate_sentence(text) 
+    
+        return jsonify({'signs': list(translation_dict.serialise())})
         
     except Exception: 
         return jsonify({'error': str(Exception)}), 500
