@@ -1,22 +1,50 @@
 from .gloss_parser import GlossParser
 from .dictionary import Dictionary
 from .sign_entry import SignEntry
+from .queue import Queue
 
 
 class Translator: 
+    """
+    Main translation class handling the conversion from English to ASL signs. 
+    
+    Uses custom data structures throughout translation process. 
+    """
     
     def __init__(self): 
+        """
+        Initialise translator with dictionary and parser.
+        """
         self.dictionary = Dictionary()
         self.dictionary.load_from_file('backend/translation/mappings.txt')
         self.parser = GlossParser(self.dictionary)
         
-        def translate_sentence(self, text): 
-            processing_queue = self.parser.parse(text) 
-            translation_sequence = self.process_queue(processing_queue)
+        def translate_sentence(self, text: str) -> list: 
+            """
+            Translate English sentence to ASl signs.
+            
+            Args: 
+            text: Input English text
+            
+            Returns: 
+            list: List of sign entries (custom dictionary types) representing ASL signs. 
+            """
+            processing_queue = self.parser.parse(text) #Transform English text to ASL gloss.
+            translation_sequence = self._process_queue(processing_queue) #Transform ASL gloss to image processing queue. 
             
             return translation_sequence
         
-        def _process_queue(self, queue): 
+        def _process_queue(self, queue: Queue) -> Dictionary: 
+            """
+            Process translation queue into sign sequence.  
+            
+            Args: 
+            queue: Processing queue 
+            
+            Returns: 
+            Dictionary: Dictionary sequence of sign entries. 
+            
+            """
             sequence = Dictionary() 
             index = 0
             while not queue.is_empty(): 
@@ -26,7 +54,10 @@ class Translator:
                 index += 1
             return sequence
         
-        def _create_entry(self, item_type, value): 
+        def _create_entry(self, item_type: str, value: str) -> Dictionary: 
+            """
+            
+            """
             if item_type == 'word': 
                 return SignEntry.create('video', label=value.upper(), value=self.dictionary.get(value))
             

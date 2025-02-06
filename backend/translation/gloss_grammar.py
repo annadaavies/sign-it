@@ -85,7 +85,7 @@ class GlossGrammar:
         list: Final formatted ASL gloss words in list form. 
         
         """
-        structured_words = [word.upper() if '-' not in word else word for word in words]
+        structured_words = [word.upper() if '-' not in word else word for word in words] #Capitalise all non-compound words. Compound words are typically left lowercase in ASL gloss. 
         return structured_words
     
         
