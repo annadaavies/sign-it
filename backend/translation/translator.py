@@ -19,57 +19,58 @@ class Translator:
         self.dictionary.load_from_file('backend/translation/mappings.txt')
         self.parser = GlossParser(self.dictionary)
         
-        def translate_sentence(self, text: str) -> list: 
-            """
-            Translate English sentence to ASl signs.
+    def translate_text(self, text: str) -> Dictionary: 
+        """
+        Translate English sentence to ASl signs.
             
-            Args: 
-            text: Input English text
+        Args: 
+        text: Input English text
             
-            Returns: 
-            list: List of sign entries (custom dictionary types) representing ASL signs. 
-            """
-            processing_queue = self.parser.parse(text) #Transform English text to ASL gloss.
-            translation_sequence = self._process_queue(processing_queue) #Transform ASL gloss to image processing queue. 
+        Returns: 
+        list: Dictionary of sign entries (custom dictionary types) representing ASL signs. 
+        """
+        processing_queue = self.parser.parse(text) #Transform English text to ASL gloss.
             
-            return translation_sequence
+        translation_sequence = self._process_queue(processing_queue) #Transform ASL gloss to image processing queue. 
+            
+        return translation_sequence
         
-        def _process_queue(self, queue: Queue) -> Dictionary: 
-            """
-            Process translation queue into sign sequence.  
+    def _process_queue(self, queue: Queue) -> Dictionary: 
+        """
+        Process translation queue into sign sequence.  
             
-            Args: 
-            queue: Processing queue 
+        Args: 
+        queue: Processing queue 
             
-            Returns: 
-            Dictionary: Dictionary sequence of sign entries. 
+        Returns: 
+        Dictionary: Dictionary sequence of sign entries. 
+        """
+        sequence = Dictionary() 
+        index = 0
             
-            """
-            sequence = Dictionary() 
-            index = 0
-            while not queue.is_empty(): 
-                item_type, value = queue.dequeue()
-                entry = self.create_entry(item_type, value) 
-                sequence.add(str(index), entry)
-                index += 1
-            return sequence
+        while not queue.is_empty(): 
+            item_type, value = queue.dequeue()
+            entry = self._create_entry(item_type, value) 
+            sequence.add(str(index), entry)
+            index += 1
+        return sequence
         
-        def _create_entry(self, item_type: str, value: str) -> Dictionary: 
-            """
+    def _create_entry(self, item_type: str, value: str) -> Dictionary: 
+        """
+        TODO: Final function from translator.py to fill in. 
+        """
+        if item_type == 'word': 
+            return SignEntry.create('video', label=value.upper(), value=self.dictionary.get(value))
             
-            """
-            if item_type == 'word': 
-                return SignEntry.create('video', label=value.upper(), value=self.dictionary.get(value))
+        elif item_type == 'letter': 
+            return SignEntry.create('image', label=value.upper(), value=f"{value.lower()}.jpg", duration=2.0)
             
-            elif item_type == 'letter': 
-                return SignEntry.create('image', label=value.upper(), value=f"{value.lower()}.jpg", duration=2.0)
+        elif item_type == 'pause': 
+            return SignEntry.create('pause', duration=value) 
             
-            elif item_type == 'pause': 
-                return SignEntry.create('pause', duration=value) 
+        elif item_type == 'compound-end': 
+            return SignEntry.create('animation', label=value.upper(), duration=1.0)
             
-            elif item_type == 'compound-end': 
-                return SignEntry.create('animation', label=value.upper(), duration=1.0)
-            
-            return Dictionary()
+        return Dictionary()
     
             

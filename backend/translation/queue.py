@@ -68,8 +68,8 @@ class Queue:
         Returns: 
         bool: Flag to mark whether the queue is empty (True if queue is empty, False if queue has at least one node). 
         """
-        empty_check = self.front is None
-        return empty_check 
+        check_empty = self.front is None
+        return check_empty
     
     def peek(self) -> any: 
         """
@@ -83,7 +83,7 @@ class Queue:
         
         return None
     
-    def iter_all_items(self): #TODO: For function type hints, this returns a list (of any data type), can't seem to do -> list[any] or -> list?
+    def items(self) -> list: #TODO: For function type hints, this returns a list (of any data type), can't seem to do -> list[any] or -> list?
         """
         Retrieve all elements in the queue as a list. 
         

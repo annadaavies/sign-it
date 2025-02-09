@@ -32,12 +32,12 @@ def predict():
 def translate(): 
     try: 
         data = request.get_json()
-        text = data.get('text', '')
+        if 'text' not in data or not data['text'].strip(): 
+            return jsonify({'Error': 'No text provided'}), 400
         
-        translator = Translator()
-        translation_dict = translator.translate_sentence(text) 
+        translation_dict = translator.translate_text(data['text']) 
     
-        return jsonify({'signs': list(translation_dict.serialise())})
+        return jsonify({'signs': translation_dict.serialise()})
         
     except Exception: 
         return jsonify({'error': str(Exception)}), 500

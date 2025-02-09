@@ -33,6 +33,11 @@ class GlossParser:
         processing_queue = self.gloss_processor.create_processing_queue(structured_gloss) 
         
         return processing_queue
+    
+    
+    
+    
+    
 
 
     

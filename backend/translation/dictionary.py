@@ -52,14 +52,11 @@ class Dictionary:
         
         Handles collisions using chaining. 
         
-        Args: 
-        key: Lookup identifier
-        value: 
-        
+        Args:
         key: Unique identifier for the entry to add.
         value: Corresponding data to store with the key. 
         """
-        if self.count == self.size: 
+        if self.count >= self.size: 
             raise IndexError("Error: Dictionary is full.")
         
         index = self.hash(key) 
@@ -98,12 +95,17 @@ class Dictionary:
         
         return None
     
-    def remove(self, key): 
-        #TODO: Remember to finish this docstring!!!!!!!
+    def remove(self, key: str) -> bool: 
+        """
+        Remove key-value pair from dictionary. 
+        
+        Args: 
+        TODO: Finish doc string for this function!!!
+        """
         index = self.hash(key) 
         current = self.table[index]
-        
         previous = None
+        
         while current: 
             if current.key == key: 
                 if previous: 
@@ -116,7 +118,7 @@ class Dictionary:
             current = current.next
         return False
     
-    def in_dict(self, key: str) -> bool: 
+    def __contains__(self, key: str) -> bool: 
         """
         Check if a key-value pair exists in the dictionary based on the key. 
         
@@ -144,34 +146,40 @@ class Dictionary:
         """
         try: 
             with open(filename, 'r') as file: 
-                for line_number, line in enumerate(file, 1): 
-                    line = line.strip()
+                for line in file: 
+                    key, value = line.strip().split(',', 1)
+                    self.add(key.lower(), value)
                     if not line: 
                         continue
-                    
-                    if ',' not in line: 
-                        raise ValueError("Error: File incorrectly formatted. See docstring for appropriate input file format.")
-                    
-                    key, value = line.split(',')
-                    self.add(key.lower(), value)
-                    
-        except: 
-            raise FileNotFoundError("Error: File not found.")
+        except FileNotFoundError: 
+            raise FileNotFoundError(f"Error: Mapping file {filename} not found.")
 
 
-    def serialise(self): 
+    def serialise(self) -> list: 
+        """
+        #TODO: Fill out this docstring. 
         
+        Recursive serialisation for API responses.
+        
+        Transforms each dictionary entry into Pythonic dictionary key-value pairs which are appended to a list. 
+        
+        Recursion used to deal with any custom Dictionary entries in the dictionary. 
+        """
         result = []
         for entry in self.table: 
             current = entry 
             while current: 
                 if isinstance(current.value, Dictionary): 
-                    result.append(current.value.serialise())
-                else: 
-                    result.append({
+                    serialised = {
                         'key': current.key,
+                        'value': current.value.serialise()
+                    }
+                else: 
+                    serialised = {
+                        'key': current.key, 
                         'value': current.value
-                    })
-                current = current.nexts
+                    }
+                result.append(serialised) 
+                current = current.next
         return result
         
