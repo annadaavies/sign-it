@@ -37,7 +37,7 @@ class Queue:
             self.front = self.rear = new_node
         else: #If queue not empty, add the new node after the current rear and update the rear to be the new node. 
             self.rear.next = new_node
-            self.read = new_node
+            self.rear = new_node
         
         self.count += 1 
         

@@ -25,7 +25,9 @@ export const predictLetter = async (imageData) => {
 export const translateText = async (text) => {
   try {
     const response = await axios.post(`${API_BASE}/translate`, { text });
-    return response.data.signs.map((item) => item.value);
+    return response.data.signs.flatMap((item) =>
+      item.value.map ? item.value : [item.value]
+    );
   } catch (error) {
     console.error("Translation API error:", error);
     return [];

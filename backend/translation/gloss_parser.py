@@ -28,7 +28,7 @@ class GlossParser:
         Returns: 
         Queue: Image processing queue for translation (to be displayed to user through interface).
         """
-        structured_gloss = self.grammar_parser.prase_grammar(text) 
+        structured_gloss = self.grammar_parser.parse_grammar(text) 
         
         processing_queue = self.gloss_processor.create_processing_queue(structured_gloss) 
         

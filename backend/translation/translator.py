@@ -57,20 +57,38 @@ class Translator:
         
     def _create_entry(self, item_type: str, value: str) -> Dictionary: 
         """
-        TODO: Final function from translator.py to fill in. 
+        Create sign entry from queue item using a mapping approach. 
+        
+        Args: 
+        item_type: Type of entry to create (word, letter, pause, compound-end). 
+        value: Value to use for the entry. 
+        
+        Returns: 
+        Dictionary: Configured sign entry. 
         """
+        
+        entry = Dictionary() 
+        
         if item_type == 'word': 
-            return SignEntry.create('video', label=value.upper(), value=self.dictionary.get(value))
+            entry.add('type', 'video')
+            entry.add('label', value.upper())
+            entry.add('value', self.dictionary.get(value))
             
         elif item_type == 'letter': 
-            return SignEntry.create('image', label=value.upper(), value=f"{value.lower()}.jpg", duration=2.0)
+            entry.add('type', 'image')
+            entry.add('label', value.upper())
+            entry.add('value', f"{value.lower()}.jpg")
+            entry.add('duration', 2.0)
             
-        elif item_type == 'pause': 
-            return SignEntry.create('pause', duration=value) 
+        elif item_type == 'pause':
+            entry.add('type', 'pause')
+            entry.add('duration', 0.5) 
             
         elif item_type == 'compound-end': 
-            return SignEntry.create('animation', label=value.upper(), duration=1.0)
+            entry.add('type', 'animation')
+            entry.add('label', value.upper())
+            entry.add('duration', 1.0)
             
-        return Dictionary()
+        return entry
     
             
