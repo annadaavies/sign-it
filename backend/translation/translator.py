@@ -1,6 +1,5 @@
 from .gloss_parser import GlossParser
 from .dictionary import Dictionary
-from .sign_entry import SignEntry
 from .queue import Queue
 
 

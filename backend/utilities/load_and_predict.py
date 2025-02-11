@@ -1,4 +1,4 @@
-from neural_network import Model 
+from backend.neural_network.neural_network import Model 
 import numpy
 import cv2
 from matplotlib import pyplot as plt

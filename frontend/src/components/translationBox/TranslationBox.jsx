@@ -25,40 +25,45 @@ const TranslationBox = ({
     }
   };
 
-  return mode == "aslToEnglish" ? (
-    <div className={styles.translationBox}>
-      <div className={styles.predictionArea}>
-        <div className={styles.wordBox}>
-          <span className={styles.predictedtext}>{predictedText}</span>
+  if (mode === "aslToEnglish") {
+    return (
+      <div className={styles.translationBox}>
+        <div className={styles.predictionArea}>
+          <div className={styles.wordBox}>
+            <span className={styles.predictedText}>{predictedText}</span>
+
+            <button
+              className={styles.deleteButton}
+              onClick={onDelete}
+              disabled={!predictedText.length}
+            >
+              ⌫
+            </button>
+          </div>
           <button
-            className={styles.deleteButton}
-            onClick={onDelete}
+            className={styles.addButton}
+            onClick={onAddWord}
             disabled={!predictedText.length}
           >
-            ⌫
+            Add Word
           </button>
         </div>
-        <button
-          className={styles.addButton}
-          onClick={onAddWord}
-          disabled={!predictedText.length}
-        >
-          Add Word
-        </button>
-      </div>
 
-      <div className={styles.sentenceArea}>
-        <h3>Constructed Sentence:</h3>
-        <div className={styles.sentence}>
-          {sentence.map((word, index) => (
-            <span key={index} className={styles.sentenceWord}>
-              {word}
-            </span>
-          ))}
+        <div className={styles.sentenceArea}>
+          <h3>Constructed Sentence:</h3>
+          <div className={styles.sentence}>
+            {sentence.map((word, index) => (
+              <span key={index} className={styles.sentenceWord}>
+                {word}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
-  ) : (
+    );
+  }
+
+  return (
     <div className={styles.englishInput}>
       <form onSubmit={handleSubmit}>
         <input

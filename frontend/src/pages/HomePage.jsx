@@ -21,12 +21,15 @@ const HomePage = ({ mode }) => {
 
   return (
     <div className={styles.homeContainer}>
-      {mode == "aslToEnglish" ? (
+      {mode === "aslToEnglish" ? (
         <>
           <div className={styles.cameraSection}>
             <CameraFeed
               onPrediction={(letter) =>
-                setPredictedLetters([...predictedLetters, letter])
+                setPredictedLetters((previousLetters) => [
+                  ...previousLetters,
+                  letter,
+                ])
               }
             />
           </div>

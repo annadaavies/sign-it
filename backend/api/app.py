@@ -1,8 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-
 from backend.utilities.load_and_predict import *
-from translation.translator import Translator
+from backend.translation.translator import Translator
 
 app = Flask(__name__)
 CORS(app)

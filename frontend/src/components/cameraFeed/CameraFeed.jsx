@@ -1,5 +1,5 @@
 import Webcam from "react-webcam";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useCallback } from "react";
 import { predictLetter } from "../../services/api";
 import styles from "./CameraFeed.module.css";
 
@@ -7,7 +7,9 @@ const CameraFeed = ({ onPrediction }) => {
   const webcamRef = useRef(null);
   const intervalRef = useRef();
 
-  const capture = async () => {
+  const capture = useCallback(async () => {
+    //useCallback needed here in order to make capture a stable function so that it can be included in the dependency array.
+    if (!webcamRef.current) return;
     const imageSrc = webcamRef.current?.getScreenshot();
     if (imageSrc) {
       try {
@@ -17,7 +19,7 @@ const CameraFeed = ({ onPrediction }) => {
         console.error("Prediction error:", error);
       }
     }
-  };
+  }, [onPrediction]);
 
   useEffect(() => {
     intervalRef.current = setInterval(capture, 2000);
