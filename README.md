@@ -121,8 +121,7 @@ Listed below are all installments **required** to run the code. Optional additio
 2. To run any backend files:
 
 ```sh
-cd backend/api
-python app.py
+python -m backend.api.app
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
