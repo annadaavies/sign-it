@@ -1,5 +1,5 @@
-import Webcam from "react-webcam";
 import React, { useRef, useCallback } from "react";
+import Webcam from "react-webcam";
 import { predictLetter } from "../../services/api";
 import styles from "./CameraFeed.module.css";
 
@@ -9,7 +9,7 @@ function CameraFeed({
   translatedSentence = [],
   setTranslatedSentence = () => {},
 }) {
-  const webcamRef = useRef(null); 
+  const webcamRef = useRef(null);
 
   const captureImage = useCallback(async () => {
     if (!webcamRef.current) return;
@@ -27,13 +27,13 @@ function CameraFeed({
   }, [setPredictedLetters]);
 
   const handleDeleteLastLetter = () => {
-    setPredictedLetters((prev) => prev.slice(0, -1)); 
+    setPredictedLetters((prev) => prev.slice(0, -1));
   };
 
   const handleAddWord = () => {
-    if (predictedLetters.length === 0) return; 
+    if (predictedLetters.length === 0) return;
     const newWord = predictedLetters.join("");
-    setTranslatedSentence((prev => [...prev, newWord]);
+    setTranslatedSentence((prev) => [...prev, newWord]);
     setPredictedLetters([]);
   };
 
@@ -52,34 +52,31 @@ function CameraFeed({
 
         <div className={styles.dashedOverlay}></div>
 
-        <button className={styles.captureButton} onClick={capturalImage}>
+        <button className={styles.captureButton} onClick={captureImage}>
           Capture
         </button>
 
         <div className={styles.bottomOverlay}>
           <div className={styles.predictedLettersBox}>
             {predictedLetters.length === 0 ? (
-              <span className = {styles.placeholderText}>
+              <span className={styles.placeholderText}>
                 Letters will appear here...
               </span>
-
             ) : (
               <span className={styles.predictedLetters}>
                 {predictedLetters.join("")}
               </span>
             )}
           </div>
-
           <div className={styles.buttonGroup}>
-            <button 
+            <button
               className={styles.deleteButton}
               onClick={handleDeleteLastLetter}
               disabled={predictedLetters.length === 0}
             >
               Delete
             </button>
-
-            <button 
+            <button
               className={styles.addWordButton}
               onClick={handleAddWord}
               disabled={predictedLetters.length === 0}

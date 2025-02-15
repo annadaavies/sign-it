@@ -1,33 +1,42 @@
 .homeContainer {
   flex: 1;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
-.aslToEnglish {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.aslToEnglishContainer {
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  align-items: center;
+}
+
+.translatedSentenceBox {
+  width: 100%;
+  max-width: 800px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1rem;
+  border: 2px solid #dee2e6;
+}
+
+.translatedSentence {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.translatedWord {
+  background: #e9ecef;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 500;
 }
 
 .englishToAsl {
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
-}
-
-.cameraSection {
-  position: relative;
-  background: #000;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.translationSection {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }

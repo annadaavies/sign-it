@@ -1,57 +1,44 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import CameraFeed from "../components/cameraFeed/CameraFeed";
 import TranslationBox from "../components/translationBox/TranslationBox";
 import SignDisplay from "../components/signDisplay/SignDisplay";
 import styles from "../assets/styles/HomePage.module.css";
 
-const HomePage = ({ mode }) => {
+function HomePage({ mode }) {
   const [predictedLetters, setPredictedLetters] = useState([]);
-  const [sentence, setSentence] = useState([]);
+  const [translatedSentence, setTranslatedSentence] = useState([]);
   const [signs, setSigns] = useState([]);
-
-  const handleAddWord = () => {
-    const word = predictedLetters.join("");
-    setSentence([...sentence, word]);
-    setPredictedLetters([]);
-  };
-
-  const handleDelete = () => {
-    setPredictedLetters((prev) => prev.slice(0, -1));
-  };
 
   return (
     <div className={styles.homeContainer}>
       {mode === "aslToEnglish" ? (
-        <>
-          <div className={styles.cameraSection}>
-            <CameraFeed
-              onPrediction={(letter) =>
-                setPredictedLetters((previousLetters) => [
-                  ...previousLetters,
-                  letter,
-                ])
-              }
-            />
-          </div>
+        <div className={styles.aslToEnglishContainer}>
+          <CameraFeed
+            predictedLetters={predictedLetters}
+            setPredictedLetters={setPredictedLetters}
+            translatedSentence={translatedSentence}
+            setTranslatedSentence={setTranslatedSentence}
+          />
 
-          <div className={styles.translationSection}>
-            <TranslationBox
-              mode={mode}
-              predictedText={predictedLetters.join("")}
-              onAddWord={handleAddWord}
-              onDelete={handleDelete}
-              sentence={sentence}
-            />
+          <div className={styles.translatedSentenceBox}>
+            <h3>Translated Sentence:</h3>
+            <div className={styles.translatedSentence}>
+              {translatedSentence.map((word, index) => (
+                <span key={index} className={styles.translatedWord}>
+                  {word}
+                </span>
+              ))}
+            </div>
           </div>
-        </>
+        </div>
       ) : (
-        <div className={styles.englishToAslContainer}>
+        <div className={styles.englishToAsl}>
           <TranslationBox mode={mode} onTranslate={setSigns} />
           <SignDisplay signs={signs} />
         </div>
       )}
     </div>
   );
-};
+}
 
 export default HomePage;
