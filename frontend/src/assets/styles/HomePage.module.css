@@ -1,11 +1,13 @@
 .homeContainer {
   flex: 1;
-  padding: 2rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .aslToEnglishContainer {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -14,7 +16,7 @@
 
 .translatedSentenceBox {
   width: 100%;
-  max-width: 800px;
+  max-width: 1200px;
   background: #ffffff;
   border-radius: 8px;
   padding: 1rem;
@@ -35,7 +37,8 @@
   font-weight: 500;
 }
 
-.englishToAsl {
+.englishToAslContainer {
+  width: 100%;
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem;

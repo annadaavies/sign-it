@@ -38,7 +38,7 @@ function CameraFeed({
   };
 
   return (
-    <div className={styles.cameraContainer}>
+    <div className={styles.container}>
       <div className={styles.webcamWrapper}>
         <Webcam
           audio={false}
@@ -55,35 +55,35 @@ function CameraFeed({
         <button className={styles.captureButton} onClick={captureImage}>
           Capture
         </button>
+      </div>
 
-        <div className={styles.bottomOverlay}>
-          <div className={styles.predictedLettersBox}>
-            {predictedLetters.length === 0 ? (
-              <span className={styles.placeholderText}>
-                Letters will appear here...
-              </span>
-            ) : (
-              <span className={styles.predictedLetters}>
-                {predictedLetters.join("")}
-              </span>
-            )}
-          </div>
-          <div className={styles.buttonGroup}>
-            <button
-              className={styles.deleteButton}
-              onClick={handleDeleteLastLetter}
-              disabled={predictedLetters.length === 0}
-            >
-              Delete
-            </button>
-            <button
-              className={styles.addWordButton}
-              onClick={handleAddWord}
-              disabled={predictedLetters.length === 0}
-            >
-              Add Word
-            </button>
-          </div>
+      <div className={styles.bottomBar}>
+        <div className={styles.predictedLettersBox}>
+          {predictedLetters.length === 0 ? (
+            <span className={styles.placeholderText}>
+              Letters will appear here...
+            </span>
+          ) : (
+            <span className={styles.predictedLetters}>
+              {predictedLetters.join("")}
+            </span>
+          )}
+        </div>
+        <div className={styles.buttonGroup}>
+          <button
+            className={styles.deleteButton}
+            onClick={handleDeleteLastLetter}
+            disabled={predictedLetters.length === 0}
+          >
+            Delete
+          </button>
+          <button
+            className={styles.addWordButton}
+            onClick={handleAddWord}
+            disabled={predictedLetters.length === 0}
+          >
+            Add Word
+          </button>
         </div>
       </div>
     </div>

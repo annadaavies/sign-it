@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import os
 from backend.utilities.load_and_predict import *
 from backend.translation.translator import Translator
 
@@ -14,11 +15,15 @@ def predict():
             return jsonify({'Error': 'No image provided.'}), 400
         
         image_file = request.files['image']
-        temp_file_path = f"/temp/{image_file.filename}"
+        
+        if not os.path.exists('temp_uploads'): 
+            os.makedirs('temp_uploads', exist_ok=True)
+        
+        temp_file_path = "temp_uploads/"+image_file.filename
         image_file.save(temp_file_path)
         
         processed_image = process_image(temp_file_path)
-        prediction = load_and_predict(processed_image)
+        prediction = load_and_predict("asl.model", processed_image)
          
         return jsonify({'letter': prediction})
     

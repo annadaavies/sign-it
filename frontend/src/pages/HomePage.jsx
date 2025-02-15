@@ -32,7 +32,7 @@ function HomePage({ mode }) {
           </div>
         </div>
       ) : (
-        <div className={styles.englishToAsl}>
+        <div className={styles.englishToAslContainer}>
           <TranslationBox mode={mode} onTranslate={setSigns} />
           <SignDisplay signs={signs} />
         </div>
