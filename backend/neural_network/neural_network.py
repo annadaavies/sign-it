@@ -167,7 +167,7 @@ class DropoutLayer:
 
 
 class LinearActivation:
-    """Applgies the Linear activation function"""
+    """Applies the Linear activation function"""
 
     def forward_pass(self, inputs: numpy.ndarray, training: bool):
         """
@@ -470,7 +470,7 @@ class CategoricalCrossEntropyLoss(Loss):
         """
         sample_number = len(predicted_probabilities) 
 
-        predicted_probabilities_adjusted = [] #Adjusted in the case that the neural network puts full confidence into the wrong class for a sample, then the loss calculation would involve calculating -log(0) which is not defined (asymptote, negative infinity!). Therefore, this adjustment will prevent loss from being exactly, making it a very small value instead, but won't make it a negative value (which it would if you tried to solve the problem by adding a very small value) and won't bias overall loss towards 1 as it is a very insignificant value. It essentially doesn't drag the mean towards any specific value, but prevents log(0).
+        #Probabilities adjusted in the case that the neural network puts full confidence into the wrong class for a sample, then the loss calculation would involve calculating -log(0) which is not defined (asymptote, negative infinity!). Therefore, this adjustment will prevent loss from being exactly, making it a very small value instead, but won't make it a negative value (which it would if you tried to solve the problem by adding a very small value) and won't bias overall loss towards 1 as it is a very insignificant value. It essentially doesn't drag the mean towards any specific value, but prevents log(0).
         
         clipped_probabilities = numpy.clip(predicted_probabilities, 1e-7, 1 - 1e-7)
 
@@ -717,7 +717,7 @@ class AdagradOptimiser:
         """
         Initialises the Adagrad optimise with initial/default values for learning rate and decay rate.
 
-        Keyword arguments:
+        Args:
         learning_rate (float): The initial learning rate, to be decayed over time by the decay rate. Set to 1 to begin with.
         decay (float): The decay rate, which determines the rate at which the learning_rate will be decreased (i.e. the rate at which the 'steps' will be made smaller). Set to 0 to begin with.
         """
@@ -738,13 +738,13 @@ class AdagradOptimiser:
                 1.0 / (1.0 + self.decay * self.iterations)
             )  # If there is a decay rate other than 0, this will update the self.current_learning_rate attribute using the relevant formula. The formula essentially multiplies the initial learning rate by 1/(the decay rate * the number of steps). The added 1 makes sure that the algorithm never raises the learning rate. For example, in the first step, we must divide 1 by the learning rate (0.001 for example), which would result in a current learning rate of 1000, which was not the intended result. The added 1 ensures that the result is a fraction of the starting learning rate.
 
-    def update_parameters(self, layer: numpy.ndarray):
+    def update_parameters(self, layer: Layer):
         """
         Updates the weights and biases of the given layer using the relevant Adagrad equations.
 
         This method modifies the layer's weight and bias caches, applying Adagrad updates based on the current gradients of the layer.
 
-        Keyword arguments:
+        Args:
         layer (Layer): The layer object whose parameters are to be updated.
         """
         if not hasattr(
@@ -1332,7 +1332,7 @@ class Model:
             pickle.dump(model, file)
 
     @staticmethod #This must be a static method as you should be able to use it without instantiating an object of the Model class. 
-    def load(file_path: str) -> "Model":
+    def load(file_path: str) -> "Model": #NOTE: Need to fix this as well. Can't seem to return a Model class data type. 
         """
         Deserialise model from storage. 
         
@@ -1388,6 +1388,7 @@ class Model:
         """
         if batch_size is None: 
             return data, labels
+        
         start = step * batch_size
         end = start + batch_size
         

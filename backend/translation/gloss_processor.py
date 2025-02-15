@@ -59,7 +59,6 @@ class GlossProcessor:
         Returns: 
         bool: Boolean flag to indicate whether punctuation is found. True if punctuation in word, False otherwise. 
         """
-        
         for char in item: 
             if char in self.punctuation: 
                 return True

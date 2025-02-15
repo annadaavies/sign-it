@@ -1,51 +1,96 @@
 import Webcam from "react-webcam";
-import { useRef, useEffect, useCallback } from "react";
+import React, { useRef, useCallback } from "react";
 import { predictLetter } from "../../services/api";
 import styles from "./CameraFeed.module.css";
 
-const CameraFeed = ({ onPrediction }) => {
-  const webcamRef = useRef(null);
-  const intervalRef = useRef();
+function CameraFeed({
+  predictedLetters = [],
+  setPredictedLetters = () => {},
+  translatedSentence = [],
+  setTranslatedSentence = () => {},
+}) {
+  const webcamRef = useRef(null); 
 
-  const capture = useCallback(async () => {
-    //useCallback needed here in order to make capture a stable function so that it can be included in the dependency array.
+  const captureImage = useCallback(async () => {
     if (!webcamRef.current) return;
-    const imageSrc = webcamRef.current?.getScreenshot();
+    const imageSrc = webcamRef.current.getScreenshot();
     if (imageSrc) {
       try {
         const letter = await predictLetter(imageSrc);
-        onPrediction(letter);
+        if (letter) {
+          setPredictedLetters((prev) => [...prev, letter]);
+        }
       } catch (error) {
         console.error("Prediction error:", error);
       }
     }
-  }, [onPrediction]);
+  }, [setPredictedLetters]);
 
-  useEffect(() => {
-    intervalRef.current = setInterval(capture, 2000);
-    {
-      /* Capture every two seconds */
-    }
+  const handleDeleteLastLetter = () => {
+    setPredictedLetters((prev) => prev.slice(0, -1)); 
+  };
 
-    return () => clearInterval(intervalRef.current);
-  }, []);
+  const handleAddWord = () => {
+    if (predictedLetters.length === 0) return; 
+    const newWord = predictedLetters.join("");
+    setTranslatedSentence((prev => [...prev, newWord]);
+    setPredictedLetters([]);
+  };
 
   return (
     <div className={styles.cameraContainer}>
-      <Webcam
-        audio={false}
-        ref={webcamRef}
-        screenshotFormat="image/jpeg"
-        className={styles.camera}
-        videoConstraints={{
-          facingMode: "user",
-          width: 1280,
-          height: 720,
-        }}
-      />
-      <div className={styles.overlay}></div>
+      <div className={styles.webcamWrapper}>
+        <Webcam
+          audio={false}
+          ref={webcamRef}
+          screenshotFormat="image/jpeg"
+          className={styles.webcam}
+          videoConstraints={{
+            facingMode: "user",
+          }}
+        />
+
+        <div className={styles.dashedOverlay}></div>
+
+        <button className={styles.captureButton} onClick={capturalImage}>
+          Capture
+        </button>
+
+        <div className={styles.bottomOverlay}>
+          <div className={styles.predictedLettersBox}>
+            {predictedLetters.length === 0 ? (
+              <span className = {styles.placeholderText}>
+                Letters will appear here...
+              </span>
+
+            ) : (
+              <span className={styles.predictedLetters}>
+                {predictedLetters.join("")}
+              </span>
+            )}
+          </div>
+
+          <div className={styles.buttonGroup}>
+            <button 
+              className={styles.deleteButton}
+              onClick={handleDeleteLastLetter}
+              disabled={predictedLetters.length === 0}
+            >
+              Delete
+            </button>
+
+            <button 
+              className={styles.addWordButton}
+              onClick={handleAddWord}
+              disabled={predictedLetters.length === 0}
+            >
+              Add Word
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
-};
+}
 
 export default CameraFeed;

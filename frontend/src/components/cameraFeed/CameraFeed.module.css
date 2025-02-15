@@ -1,26 +1,118 @@
 .cameraContainer {
   position: relative;
   width: 100%;
-  padding-top: 56.25%;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.camera {
+.webcamWrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  background: #000;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.webcam {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
-.overlay {
+.dashedOverlay {
   position: absolute;
   top: 50%;
   left: 50%;
+  width: 50%;
+  height: 50%;
   transform: translate(-50%, -50%);
-  width: 200px;
-  height: 200px;
-  border: 4px solid rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  border: 3px dashed #ffffff;
+  box-sizing: border-box;
   pointer-events: none;
+}
+
+.captureButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  padding: 0.75rem, 1.25rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s ease;
+}
+
+.captureButton:hover {
+  background-color: #f0f0f0;
+}
+
+.bottomOverlay {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: #ffffff;
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.predictedLettersBox {
+  flex: 1;
+  background: #f8f9fa;
+  border: 2px solid #fee2e6;
+  border-radius: 8px;
+  padding: 1rem;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholderText {
+  color: #6c757d;
+}
+
+.predictedLetters {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.deleteButton,
+.addWordButton {
+  background: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem, 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.deleteButton:hover,
+.addWordButton:hover {
+  background-color: #0056b3;
+}
+
+.deleteButton:disabled,
+.addWordButton:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
 }
