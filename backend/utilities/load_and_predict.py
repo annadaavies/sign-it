@@ -1,6 +1,7 @@
 from backend.neural_network.neural_network import Model 
 import numpy
 import cv2
+import os
 from matplotlib import pyplot as plt
 
 DIRECTORY_PATH = "/Users/anna/desktop/school/A LEVEL - ANNA/COMPUTER SCIENCE/NEA"
@@ -54,7 +55,9 @@ def load_and_predict(model_name: str, image_data) -> str:
     25: 'Z',
     }
     
-    model = Model.load(model_name)
+    model_path = os.path.join(os.path.dirname(__file__), '..', '..', model_name)
+    
+    model = Model.load(model_path)
     
     confidences = model.predict(image_data)
     

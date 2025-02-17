@@ -147,7 +147,9 @@ class Dictionary:
         try: 
             with open(filename, 'r') as file: 
                 for line in file: 
-                    key, value = line.strip().split(',', 1)
+                    key, value = line.split(',', 1)
+                    key = key.strip().lower()
+                    value = value.strip()
                     self.add(key.lower(), value)
                     if not line: 
                         continue

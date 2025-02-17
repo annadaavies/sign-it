@@ -1,4 +1,4 @@
-from neural_network import *
+from backend.neural_network.neural_network import *
 import os
 import cv2
 import numpy
@@ -86,5 +86,5 @@ model.train(
     print_step=100,
 )
 
-#model.save("asl.model")
+model.save("asl.model")
 

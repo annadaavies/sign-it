@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import HomePage from "./pages/HomePage";
 import styles from "./assets/styles/App.module.css";
 

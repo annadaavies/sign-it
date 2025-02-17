@@ -27,8 +27,8 @@ def predict():
          
         return jsonify({'letter': prediction})
     
-    except Exception: 
-        app.logger.error(f"Prediction error: {str(Exception)}")
+    except Exception as exception: 
+        app.logger.error(f"Prediction error: {exception}")
         return jsonify({'Error': 'Server error'}), 500
 
 

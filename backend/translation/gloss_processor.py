@@ -41,8 +41,8 @@ class GlossProcessor:
             elif self.is_compound_word(item): #If the item is determined to be a compound word.
                 self.process_compound(item, queue)
                 
-            elif self.dictionary.get(item): #If the item exists in the word dictionary (from the file). 
-                queue.enqueue(('word', item))
+            elif self.dictionary.get(item.lower()): #If the item exists in the word dictionary (from the file). 
+                queue.enqueue(('word', item.lower()))
                 
             else: 
                 self.process_letters(item, queue)
@@ -88,8 +88,8 @@ class GlossProcessor:
         """
         components = compound_word.split('-')
         for component in components: 
-            if self.dictionary.get(component): #If part of the compound word exists in the defined word dictionary, add.
-                queue.enqueue(('word', component))
+            if self.dictionary.get(component.lower()): #If part of the compound word exists in the defined word dictionary, add.
+                queue.enqueue(('word', component.lower()))
             else: 
                 self.process_letters(component, queue) #If not, process the word into letters.
                 

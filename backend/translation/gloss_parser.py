@@ -30,6 +30,8 @@ class GlossParser:
         """
         structured_gloss = self.grammar_parser.parse_grammar(text) 
         
+        print(structured_gloss)
+        
         processing_queue = self.gloss_processor.create_processing_queue(structured_gloss) 
         
         return processing_queue
