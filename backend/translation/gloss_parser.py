@@ -1,4 +1,3 @@
-#NOTE: When documenting, make sure to highlight composition relationship here. 
 from .queue import Queue
 from .gloss_grammar import GlossGrammar
 from .gloss_processor import GlossProcessor
