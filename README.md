@@ -121,6 +121,9 @@ Listed below are all installments **required** to run the code. Optional additio
 2. To run any backend files:
 
 ```sh
+git lfs install
+git lfs fetch --all
+git lfs checkout
 python -m backend.api.app
 ```
 
