@@ -1,15 +1,17 @@
-import os
+import tensorflow
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 from backend.translation.translator import Translator
-from backend.neural_network.letter_recognition.asl_detector import predict_letter_from_base64
+from backend.neural_network.letter_recognition.asl_detector import ASLPredictor
+from backend.config import MODEL_PATH, ASL_LABELS, BUFFER_SIZE, CONSENSUS_THRESHOLD, PROCESSING_SIZE
 
 app = Flask(__name__)
 CORS(app)
 
 translator = Translator()
-
+model = tensorflow.keras.models.load_model(MODEL_PATH)
+asl_predictor = ASLPredictor(model=model, buffer_size=BUFFER_SIZE, consensus_threshold=CONSENSUS_THRESHOLD, processing_size=PROCESSING_SIZE, asl_labels=ASL_LABELS)
 
 @app.route("/api/predictLetter", methods=["POST"])
 def predict_letter(): 
@@ -30,7 +32,7 @@ def predict_letter():
             return jsonify({'letter': 'No Image Provided'}), 400
         
         image_base64 = data['image']
-        predicted_letter = predict_letter_from_base64(image_base64) 
+        predicted_letter = asl_predictor.predict_letter_from_base64(image_base64) 
         return jsonify({'letter': predicted_letter}), 200
     
     except Exception as exception: 
