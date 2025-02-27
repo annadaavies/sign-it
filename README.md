@@ -137,10 +137,10 @@ python -m backend.api.app
   - [x] Neural Network Optimiser Classes
   - [x] Neural Network Model Class
 - [x] Dataset Mass Formatting
-- [ ] Neural Network Model Training
-- [ ] OpenCV Image Formatting
-- [ ] Dictionary Conversion
-- [ ] GUI Interface
+- [x] Neural Network Model Training
+- [x] OpenCV Image Formatting
+- [x] Dictionary Conversion
+- [x] GUI Interface
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
