@@ -1,0 +1,5 @@
+__pycache__/
+backend/__pycache__/
+backend/neural_network/__pycache__/
+backend/translation/__pycache__/
+#venv/ add this line when the virtual environment is added.

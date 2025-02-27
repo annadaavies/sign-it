@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from "react";
+import React, { useRef, useEffect, useState, useCallback } from "react";
 import Webcam from "react-webcam";
 import { predictLetter } from "../../services/api";
 import styles from "./CameraFeed.module.css";
@@ -10,19 +10,38 @@ function CameraFeed({
   setTranslatedSentence = () => {},
 }) {
   const webcamRef = useRef(null);
+  const [isPredicting, setIsPredicting] = useState(true);
+  const [currentLetter, setCurrentLetter] = useState("");
 
-  const captureImage = useCallback(async () => {
+  useEffect(() => {
+    let intervalId;
+    if (isPredicting) {
+      intervalId = setInterval(async () => {
+        await captureImageAndPredict();
+      }, 500); // Polls every 0.5 seconds
+    }
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [isPredicting]);
+
+  const captureImageAndPredict = useCallback(async () => {
     if (!webcamRef.current) return;
     const imageSrc = webcamRef.current.getScreenshot();
-    if (imageSrc) {
-      try {
-        const letter = await predictLetter(imageSrc);
-        if (letter) {
-          setPredictedLetters((prev) => [...prev, letter]);
-        }
-      } catch (error) {
-        console.error("Prediction error:", error);
+    if (!imageSrc) return;
+
+    try {
+      const letter = await predictLetter(imageSrc);
+      if (letter && letter.length === 1 && letter.match(/[A-Z]/)) {
+        setCurrentLetter(letter);
+        setPredictedLetters((prev) => [...prev, letter]);
+      } else if (letter === "Stabilizing...") {
+        setCurrentLetter(letter);
+      } else {
+        setCurrentLetter(letter);
       }
+    } catch (error) {
+      console.error("Prediction error:", error);
     }
   }, [setPredictedLetters]);
 
@@ -35,6 +54,10 @@ function CameraFeed({
     const newWord = predictedLetters.join("");
     setTranslatedSentence((prev) => [...prev, newWord]);
     setPredictedLetters([]);
+  };
+
+  const togglePredicting = () => {
+    setIsPredicting((prev) => !prev);
   };
 
   return (
@@ -51,10 +74,6 @@ function CameraFeed({
         />
 
         <div className={styles.dashedOverlay}></div>
-
-        <button className={styles.captureButton} onClick={captureImage}>
-          Capture
-        </button>
       </div>
 
       <div className={styles.bottomBar}>
@@ -84,8 +103,13 @@ function CameraFeed({
           >
             Add Word
           </button>
+          <button className={styles.addWordButton} onClick={togglePredicting}>
+            {isPredicting ? "Stop" : "Start"} Predicting
+          </button>
         </div>
       </div>
+
+      {<p>Detected: {currentLetter}</p>}
     </div>
   );
 }
