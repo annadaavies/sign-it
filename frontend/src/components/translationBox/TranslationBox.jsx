@@ -4,24 +4,23 @@ import styles from "./TranslationBox.module.css";
 
 const TranslationBox = ({
   mode,
-  predictedText,
-  onAddWord,
-  onDelete,
-  sentence,
-  onTranslate,
+  predictedText = "",
+  onAddWord = () => {},
+  onDelete = () => {},
+  sentence = [],
+  onTranslate = () => {},
 }) => {
   const [inputText, setInputText] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (inputText.trim()) {
-      try {
-        const translatedSigns = await translateText(inputText);
+    if (!inputText.trim()) return;
 
-        onTranslate(translatedSigns);
-      } catch (error) {
-        console.error("Translation error:", error);
-      }
+    try {
+      const translatedSigns = await translateText(inputText);
+      onTranslate(translatedSigns);
+    } catch (error) {
+      console.error("Translation error:", error);
     }
   };
 
@@ -65,13 +64,13 @@ const TranslationBox = ({
 
   return (
     <div className={styles.englishInput}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.formLayout}>
         <input
           type="text"
+          className={styles.textInput}
+          placeholder="Enter English text to translate..."
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
-          placeholder="Enter English text to translate..."
-          className={styles.textInput}
         />
         <button type="submit" className={styles.translateButton}>
           Translate to ASL

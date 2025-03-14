@@ -1,9 +1,9 @@
-from backend.neural_network.digit_recognition.neural_network import *
+from backend.neural_network.clothing_recognition.neural_network import *
 import os
 import cv2
 import numpy
 
-DIRECTORY_PATH = "/Users/anna/desktop/school/A LEVEL - ANNA/COMPUTER SCIENCE/NEA/backend/neural_network/asl_images"
+DIRECTORY_PATH = "/Users/anna/desktop/school/A LEVEL - ANNA/COMPUTER SCIENCE/NEA/backend/neural_network/clothing_recognition"
 
 
 def load_dataset(dataset, path): 
@@ -44,8 +44,6 @@ images, target_labels, test_images, test_target_labels = create_dataset(DIRECTOR
 
 # Data must be shuffled otherwise, in the ordered version of the training data, the model will keep getting very good at predicting a singular label, then the next, but never all at once. Therefore, shuffling data is used to prevent the model from becoming biased towards any single class.
 keys = numpy.array(range(images.shape[0]))
-print(images.shape[0])
-print(keys)
 numpy.random.shuffle(keys)
 images = images[keys]  # We can't just randomly shuffle, as you'll lose label to image links. Instead, you can gather all 'keys' which are the same for samples and targets, and then shuffle the keys.
 target_labels = target_labels[keys]
@@ -57,22 +55,16 @@ test_images = (test_images.reshape(test_images.shape[0], -1).astype(numpy.float3
 
 model = Model()
 
-model.add_layer(Layer(images.shape[1], 128, weight_regulariser_l2=1e-4))
+model.add_layer(Layer(images.shape[1], 128))
 model.add_layer(ReluActivation())
-model.add_layer(DropoutLayer(0.5))  
-
-model.add_layer(Layer(128, 64, weight_regulariser_l2=1e-4))
+model.add_layer(Layer(128, 128))
 model.add_layer(ReluActivation())
-model.add_layer(DropoutLayer(0.3))  
-
-model.add_layer(Layer(64, 26, weight_regulariser_l2=1e-4))
+model.add_layer(Layer(128, 10))
 model.add_layer(SoftmaxActivation())
-
-model.set(
-    loss=CategoricalCrossEntropyLoss(),
-    optimiser=AdamOptimiser(learning_rate=0.01, decay=1e-3),
-    accuracy=CategoricalAccuracy(),
-)
+  
+model.set(loss=CategoricalCrossEntropyLoss(),
+optimiser=AdamOptimiser(decay=1e-3),
+accuracy=CategoricalAccuracy())
 
 model.finalise()
 
@@ -85,5 +77,4 @@ model.train(
     print_step=100,
 )
 
-model.save("asl.model")
-
+model.save("clothing.model")

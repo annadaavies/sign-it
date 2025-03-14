@@ -301,7 +301,7 @@ class SoftmaxActivation:
         Args: 
         outputs: Class probabilities from softmax activation
         
-        Returns: 
+        Returns:
         numpy.ndarray: Array of class indices with highest probability. 
         """
         return numpy.argmax(outputs, axis=1)
@@ -399,7 +399,7 @@ class Loss:
         output: numpy.ndarray,
         target_labels: numpy.ndarray,
         regularisation: bool = False
-        ) -> float | tuple:
+        ) -> "float | tuple":
         """
         Calculate loss value for the given predictions and targets.
 
@@ -422,7 +422,7 @@ class Loss:
 
         return data_loss, self.regularisation_loss()
 
-    def calculate_accumulated(self, regularisation: bool = False) -> float | tuple:
+    def calculate_accumulated(self, regularisation: bool = False) -> "float | tuple":
         """
         Compute mean loss from accumulated values at any point in the training of the neural network (e.g. could be between epochs).
         
@@ -1057,7 +1057,7 @@ class Model:
         self.trainable_layers = []
         self.softmax_classifier_output = None
 
-    def add_layer(self, layer: Layer | DropoutLayer | ReluActivation | LinearActivation | SigmoidActivation | SoftmaxActivation):
+    def add_layer(self, layer: "Layer | DropoutLayer | ReluActivation | LinearActivation | SigmoidActivation | SoftmaxActivation"):
         """
         Add a layer to the neural network. 
         
@@ -1069,7 +1069,7 @@ class Model:
     def set(
         self,
         loss: Loss = None,
-        optimiser: StochasticGradientDescentOptimiser | AdagradOptimiser | AdamOptimiser = None,
+        optimiser: "StochasticGradientDescentOptimiser | AdagradOptimiser | AdamOptimiser" = None,
         accuracy: Accuracy = None
         ):
         """

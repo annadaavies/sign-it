@@ -3,7 +3,13 @@ import numpy
 import mediapipe
 import base64
 
-class ASLPredictor: 
+class ASLPredictor:
+    """
+    A predictor class for ASL letters. This class handles: 
+    - Initialising and using a keras model for letter recognition. 
+    - Preprocessing images (hand detection via MediaPipe, resizing, and centering). 
+    - Predicting the letter from a base-64-encoded image. 
+    """
     def __init__(self, model, buffer_size, consensus_threshold, processing_size, asl_labels): 
         self.model = model 
         self.buffer_size = buffer_size
@@ -15,7 +21,7 @@ class ASLPredictor:
         self.hands_detector = self.media_pipe_hands.Hands(static_image_mode = False, max_num_hands = 1, min_detection_confidence = 0.7)
 
 
-    def preprocess_bgr_frame(self, frame_bgr: numpy.ndarray) -> numpy.ndarray:
+    def _preprocess_bgr_frame(self, frame_bgr: numpy.ndarray) -> numpy.ndarray:
         """
         Detect a single hand within a BGR frame, and preprocess it in the following manner: 
         - Extract and resize its bounding box
@@ -37,7 +43,7 @@ class ASLPredictor:
             return None
         
         frame_height, frame_width, _ = frame_bgr.shape
-        
+
         hand_mask = numpy.zeros((frame_height, frame_width), dtype=numpy.uint8) #This creates an empty mask to fill with what will be the detected hand region. 
         
         for hand_landmarks in detection_results.multi_hand_landmarks: 
@@ -109,7 +115,7 @@ class ASLPredictor:
         if frame_bgr is None: 
             return "No Frame"
 
-        preprocessed_frame = self.preprocess_bgr_frame(frame_bgr) 
+        preprocessed_frame = self._preprocess_bgr_frame(frame_bgr) 
         if preprocessed_frame is None: 
             return "No Hand"
         

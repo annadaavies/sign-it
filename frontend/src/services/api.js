@@ -31,7 +31,19 @@ export const predictLetter = async (base64Image) => {
     });
     return response.data.letter;
   } catch (error) {
-    console.error("Prediction API error:", error);
+    console.error("Letter prediction API error:", error);
+    return [];
+  }
+};
+
+export const predictClothing = async (base64Image) => {
+  try {
+    const response = await axios.post(`${API_BASE}/predictClothing`, {
+      image: base64Image,
+    });
+    return response.data.item;
+  } catch (error) {
+    console.error("Clothing prediction API error:", error);
     return [];
   }
 };
