@@ -22,18 +22,25 @@ function CameraFeed({
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [showFeedback, setShowFeedback] = useState(false);
 
-  // Poll letter prediction in normal mode
+  // Track whether clothing capture has happened at least once
+  const [clothingCaptured, setClothingCaptured] = useState(false);
+
+  /**
+   * Poll for letter predictions every 0.5s if:
+   *   - isPredicting is true,
+   *   - AND (we're not in clothingMode) OR (we are in clothingMode AND clothingCaptured===true).
+   */
   useEffect(() => {
     let intervalId;
-    if (isPredicting && !clothingMode) {
+    if (isPredicting && (!clothingMode || clothingCaptured)) {
       intervalId = setInterval(async () => {
         await captureImageAndPredict();
-      }, 500); // every 0.5s
+      }, 500);
     }
     return () => {
       if (intervalId) clearInterval(intervalId);
     };
-  }, [isPredicting, clothingMode]);
+  }, [isPredicting, clothingMode, clothingCaptured]);
 
   const captureImageAndPredict = useCallback(async () => {
     if (!webcamRef.current) return;
@@ -68,7 +75,14 @@ function CameraFeed({
     setIsPredicting((prev) => !prev);
   };
 
-  // Capture a clothing frame only in "Interactive Mode"
+  /**
+   * Capture clothing item:
+   * - if a valid item is returned, set it as predictedClothing,
+   * - show the overlay,
+   * - and enable letter polling by setting clothingCaptured = true (and isPredicting = true).
+   *
+   * If the user wants to retake, they can press this again and override the item.
+   */
   const handleCaptureClothing = async () => {
     if (!webcamRef.current) return;
     const imageSrc = webcamRef.current.getScreenshot();
@@ -79,10 +93,11 @@ function CameraFeed({
       console.log("Clothing item predicted:", item);
       setPredictedClothing(item);
 
-      // If we got a valid item, show the green overlay
       if (item && item !== "No Frame") {
-        console.log("Setting showClothingMessage to TRUE");
         setShowClothingMessage(true);
+        setClothingCaptured(true);
+        setIsPredicting(true);
+
         setTimeout(() => {
           setShowClothingMessage(false);
         }, 3000);
@@ -94,11 +109,6 @@ function CameraFeed({
 
   const handleCheckClothingSign = () => {
     const spelledWord = predictedLetters.join("").toLowerCase();
-    console.log(
-      "Checking spelledWord vs item:",
-      spelledWord,
-      predictedClothing
-    );
 
     if (!predictedClothing) {
       setFeedbackMessage("No clothing item captured yet!");
@@ -219,13 +229,15 @@ function CameraFeed({
       <p>Detected: {currentLetter}</p>
 
       {showClothingMessage && (
-        <div className={styles.clothingOverlay}>
+        <div className={styles.clothingOverlay} style={{ zIndex: 2000 }}>
           That is a {predictedClothing}. Now, Sign-It!
         </div>
       )}
 
       {showFeedback && (
-        <div className={styles.feedbackOverlay}>{feedbackMessage}</div>
+        <div className={styles.feedbackOverlay} style={{ zIndex: 2000 }}>
+          {feedbackMessage}
+        </div>
       )}
     </div>
   );
