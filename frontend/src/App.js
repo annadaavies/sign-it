@@ -1,38 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
+import ASLToEnglishPage from "./pages/ASLToEnglishPage";
+import EnglishToASLPage from "./pages/EnglishToASLPage";
+import NavigationBar from "./components/navigationBar/NavigationBar";
 import styles from "./assets/styles/App.module.css";
 
 function App() {
-  const [mode, setMode] = useState("aslToEnglish");
-
   return (
-    <div className={styles.appContainer}>
-      <header className={styles.appHeader}>
-        <img src="/logo.png" alt="SignIt" className={styles.logo} />
-
-        <h1 className={styles.title}>SignIt</h1>
-        <div className={styles.modeSwitcher}>
-          <button
-            className={`${styles.modeButton} ${
-              mode === "aslToEnglish" ? styles.active : ""
-            }`}
-            onClick={() => setMode("aslToEnglish")}
-          >
-            ASL → English
-          </button>
-
-          <button
-            className={`${styles.modeButton} ${
-              mode === "englishToAsl" ? styles.active : ""
-            }`}
-            onClick={() => setMode("englishToAsl")}
-          >
-            English → ASL
-          </button>
+    <Router>
+      <div className={styles.appContainer}>
+        <NavigationBar />
+        <div className={styles.content}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/asl-to-english" element={<ASLToEnglishPage />} />
+            <Route path="/english-to-asl" element={<EnglishToASLPage />} />
+          </Routes>
         </div>
-      </header>
-      <HomePage mode={mode} />
-    </div>
+      </div>
+    </Router>
   );
 }
 

@@ -15,12 +15,12 @@ class GlossGrammar:
         Initialise grammar rules and stop words. 
         """
         self.stop_words = Dictionary() #Stop word dictionary. These are words that are rarely signed in ASL.
-        for word in ['a', 'and', 'the', 'and', 'but', 'or']:
+        for word in ['a', 'and', 'the', 'is', 'but', 'or']:
             self.stop_words.add(word, True) 
         
         self.asl_structures = Dictionary()
         self.asl_structures.add('time-first', ['tomorrow', 'yesterday', 'today', 'next-week']) #Time-first words, in ASL should appear at the beginning of a sentence when present. 
-        self.asl_structures.add('topic-comment', ['who', 'what', 'where', 'why', 'how']) #Topic-comment words, structured in accordance to ASL's topic-comment sentence structure. 
+        self.asl_structures.add('topic-comment', ['who', 'whatb', 'where', 'why', 'how']) #Topic-comment words, structured in accordance to ASL's topic-comment sentence structure. 
 
         
     def parse_grammar(self, text: str) -> list: 

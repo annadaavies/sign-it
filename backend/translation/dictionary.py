@@ -159,8 +159,6 @@ class Dictionary:
 
     def serialise(self) -> list: 
         """
-        #TODO: Fill out this docstring. 
-        
         Recursive serialisation for API responses.
         
         Transforms each dictionary entry into Pythonic dictionary key-value pairs which are appended to a list. 

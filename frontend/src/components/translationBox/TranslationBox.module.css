@@ -99,7 +99,7 @@
 }
 
 .translateButton {
-  background: #1a73e8;
+  background: #369ef8;
   color: white;
   border: none;
   padding: 1rem;
@@ -110,6 +110,6 @@
 }
 
 .translateButton:hover {
-  background: #1557b0;
+  background: rgb(45, 134, 212);
   transform: translateY(-1px);
 }

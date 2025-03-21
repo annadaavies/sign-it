@@ -5,3 +5,4 @@ backend/translation/__pycache__/
 #venv/ add this line when the virtual environment is added.
 
 
+node_modules

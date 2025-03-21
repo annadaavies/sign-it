@@ -93,7 +93,7 @@ class GlossProcessor:
             else: 
                 self.process_letters(component, queue) #If not, process the word into letters.
                 
-        queue.enqueue(('compound-end', compound_word)) #TODO: XXXX.
+        queue.enqueue(('compound-end', compound_word)) 
     
     
     def process_letters(self, word: str, queue: Queue): 

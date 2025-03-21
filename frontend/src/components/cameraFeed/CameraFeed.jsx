@@ -13,16 +13,18 @@ function CameraFeed({
   const webcamRef = useRef(null);
   const [isPredicting, setIsPredicting] = useState(true);
 
-  // For letter predictions
+  //For letter predictions
   const [currentLetter, setCurrentLetter] = useState("");
 
-  // For clothing predictions
+  //For clothing predictions
   const [predictedClothing, setPredictedClothing] = useState("");
   const [showClothingMessage, setShowClothingMessage] = useState(false);
+
+  //For feedback to user
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [showFeedback, setShowFeedback] = useState(false);
 
-  // Track whether clothing capture has happened at least once
+  //Track whether clothing capture has happened at least once
   const [clothingCaptured, setClothingCaptured] = useState(false);
 
   /**
@@ -80,7 +82,6 @@ function CameraFeed({
    * - if a valid item is returned, set it as predictedClothing,
    * - show the overlay,
    * - and enable letter polling by setting clothingCaptured = true (and isPredicting = true).
-   *
    * If the user wants to retake, they can press this again and override the item.
    */
   const handleCaptureClothing = async () => {
@@ -156,88 +157,62 @@ function CameraFeed({
       </div>
 
       <div className={styles.bottomBar}>
-        {!clothingMode && (
-          <>
-            <div className={styles.predictedLettersBox}>
-              {predictedLetters.length === 0 ? (
-                <span className={styles.placeholderText}>
-                  Letters will appear...
-                </span>
-              ) : (
-                <span className={styles.predictedLetters}>
-                  {predictedLetters.join("")}
-                </span>
-              )}
-            </div>
-            <div className={styles.buttonGroup}>
-              <button
-                className={styles.deleteButton}
-                onClick={handleDeleteLastLetter}
-                disabled={predictedLetters.length === 0}
-              >
-                Delete
-              </button>
-              <button
-                className={styles.addWordButton}
-                onClick={handleAddWord}
-                disabled={predictedLetters.length === 0}
-              >
-                Add Word
-              </button>
-              <button
-                className={styles.addWordButton}
-                onClick={togglePredicting}
-              >
-                {isPredicting ? "Stop" : "Start"} Predicting
-              </button>
-            </div>
-          </>
-        )}
+        <div className={styles.predictedLettersBox}>
+          {predictedLetters.length === 0 ? (
+            <span className={styles.placeholderText}>
+              Letters will appear...
+            </span>
+          ) : (
+            <span className={styles.predictedLetters}>
+              {predictedLetters.join("")}
+            </span>
+          )}
+        </div>
 
-        {clothingMode && (
-          <>
-            <div className={styles.predictedLettersBox}>
-              {predictedLetters.length === 0 ? (
-                <span className={styles.placeholderText}>
-                  Letters will appear...
-                </span>
-              ) : (
-                <span className={styles.predictedLetters}>
-                  {predictedLetters.join("")}
-                </span>
-              )}
-            </div>
-            <div className={styles.buttonGroup}>
-              <button
-                className={styles.deleteButton}
-                onClick={handleDeleteLastLetter}
-                disabled={predictedLetters.length === 0}
-              >
-                Delete
-              </button>
-              <button
-                className={styles.addWordButton}
-                onClick={handleCheckClothingSign}
-              >
-                Enter
-              </button>
-            </div>
-          </>
-        )}
+        <div className={styles.buttonGroup}>
+          <button
+            className={styles.deleteButton}
+            onClick={handleDeleteLastLetter}
+            disabled={predictedLetters.length === 0}
+          >
+            Delete
+          </button>
+
+          {!clothingMode && (
+            <button
+              className={styles.addWordButton}
+              onClick={handleAddWord}
+              disabled={predictedLetters.length === 0}
+            >
+              Add Word
+            </button>
+          )}
+
+          {clothingMode ? (
+            <button
+              className={styles.addWordButton}
+              onClick={handleCheckClothingSign}
+            >
+              Enter
+            </button>
+          ) : (
+            <button className={styles.addWordButton} onClick={togglePredicting}>
+              {isPredicting ? "Stop" : "Start"} Predicting
+            </button>
+          )}
+        </div>
       </div>
 
       <p>Detected: {currentLetter}</p>
 
       {showClothingMessage && (
-        <div className={styles.clothingOverlay} style={{ zIndex: 2000 }}>
-          That is a {predictedClothing}. Now, Sign-It!
+        <div className={styles.clothingOverlay}>
+          That is a {predictedClothing}. Now, sign it!
         </div>
       )}
 
       {showFeedback && (
-        <div className={styles.feedbackOverlay} style={{ zIndex: 2000 }}>
-          {feedbackMessage}
-        </div>
+        <div className={styles.feedbackOverlay}>{feedbackMessage}</div>
       )}
     </div>
   );

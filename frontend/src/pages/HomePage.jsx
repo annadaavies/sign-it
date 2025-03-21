@@ -1,71 +1,30 @@
-import React, { useState } from "react";
-import CameraFeed from "../components/cameraFeed/CameraFeed";
-import TranslationBox from "../components/translationBox/TranslationBox";
-import SignDisplay from "../components/signDisplay/SignDisplay";
+import React from "react";
+import { Link } from "react-router-dom";
 import styles from "../assets/styles/HomePage.module.css";
 
-function HomePage({ mode }) {
-  const [predictedLetters, setPredictedLetters] = useState([]);
-  const [translatedSentence, setTranslatedSentence] = useState([]);
-  const [signs, setSigns] = useState([]);
-
-  const [clothingMode, setClothingMode] = useState(false);
-
-  const toggleClothingMode = () => {
-    setPredictedLetters([]);
-    setTranslatedSentence([]);
-    setSigns([]);
-    setClothingMode((prev) => !prev);
-  };
-
-  if (mode === "aslToEnglish") {
-    return (
-      <div className={styles.homeContainer}>
-        <button
-          style={{
-            background: clothingMode ? "#ffc107" : "#e8f0fe",
-            color: clothingMode ? "#000" : "#1a73e8",
-            padding: "0.75 rem 1.5rem",
-            borderRadius: "8px",
-            border: "none",
-            marginBottom: "1rem",
-            cursor: "pointer",
-            fontWeight: "600",
-          }}
-          onClick={toggleClothingMode}
-        >
-          {clothingMode ? "Exit Interactive Mode" : "Interactive Mode"}
-        </button>
-
-        <CameraFeed
-          predictedLetters={predictedLetters}
-          setPredictedLetters={setPredictedLetters}
-          translatedSentence={translatedSentence}
-          setTranslatedSentence={setTranslatedSentence}
-          clothingMode={clothingMode}
-        />
-
-        {!clothingMode && (
-          <div className={styles.translatedSentenceBox}>
-            <h3>Translated Sentence:</h3>
-            <div className={styles.translatedSentence}>
-              {translatedSentence.map((word, index) => (
-                <span key={index} className={styles.translatedWord}>
-                  {word}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  }
-
+function HomePage() {
   return (
     <div className={styles.homeContainer}>
-      <div className={styles.englishToAslContainer}>
-        <TranslationBox mode={mode} onTranslate={setSigns} />
-        <SignDisplay signs={signs} />
+      <div className={styles.leftSection}>
+        <h1 className={styles.title}>SignIt</h1>
+        <p className={styles.description}>
+          The bidirectional sign language translation app.
+        </p>
+        <div className={styles.buttonGroup}>
+          <Link to="/asl-to-english">
+            <button className={styles.selectionButton}>ASL → English</button>
+          </Link>
+          <Link to="/english-to-asl">
+            <button className={styles.selectionButton}>English → ASL</button>
+          </Link>
+        </div>
+      </div>
+      <div className={styles.rightSection}>
+        <img
+          src="/curved-hand.png"
+          alt="Curved Hand Artwork"
+          className={styles.artwork}
+        />
       </div>
     </div>
   );
