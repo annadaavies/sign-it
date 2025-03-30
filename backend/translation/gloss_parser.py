@@ -1,13 +1,12 @@
 from .queue import Queue
 from .gloss_grammar import GlossGrammar
 from .gloss_processor import GlossProcessor
-from .dictionary import Dictionary #Only imported for __init__ type hint. 
 
 class GlossParser: 
     """
     Combines grammatical parsing and image processing queue generation. Essentially orchestrates the converting of English text to image processing queue.
     """
-    def __init__(self, dictionary: Dictionary): 
+    def __init__(self, dictionary: dict): 
         """
         Initialise parser with required components (grammar parser and image queue generator). 
         

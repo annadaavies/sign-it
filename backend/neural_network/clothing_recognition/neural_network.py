@@ -1,11 +1,6 @@
 import numpy
-import os
-import cv2
 import pickle
 import copy
-
-
-IMAGE_PATH = "/Users/anna/desktop/school/A LEVEL - ANNA/COMPUTER SCIENCE/NEA/asl_images"
 
 
 class Layer:
@@ -31,7 +26,6 @@ class Layer:
         bias_regulariser_l1 (float): L1 regularisation factor for the bias parameters.
         bias_regulariser_l2 (float): L2 regularisation factor for the bias parameters. 
         """
-        #TODO: Set seed to control random initialisation. NOTE: In general, anywhere numpy.random.randn is done, set a seed. Set to 0. 
         self.weights = 0.01 * numpy.random.randn(number_inputs, number_neurons) #The weight initialisation factor can be 0.1 or 0.01. See Glorot uniform distribution note from Keras devs. 
         self.biases = numpy.zeros((1, number_neurons)) 
         
@@ -111,8 +105,21 @@ class Layer:
 
 
 class InputLayer:
-    #NOTE: Need to docstring this class!!!
-    def forward_pass(self, inputs, training):
+    """
+    Input layer for the neural network. 
+    
+    This layers acts as a placeholder to pass the input values to subsequent layers without applying any transformations or computations. 
+    """
+    def forward_pass(self, inputs: numpy.ndarray, training: bool):
+        """
+        Perform forward propagation through the input layer. 
+        
+        Assigns received input data directly to output data. No modifications or computations are applied to the data in this layer. 
+        
+        Args:
+        inputs (numpy.ndarray): The input data. 
+        training (bool): training: Boolean flag indicating training mode. 
+        """
         self.output = inputs
 
 
@@ -353,7 +360,7 @@ class Loss:
     
     def __init__(self): 
         """
-        NOTE: Fill this out
+        Initialises key loss variables. 
         """
         self.trainable_layers = []
         self.accumulated_sum = 0.0
@@ -703,7 +710,6 @@ class StochasticGradientDescentOptimiser:
         """
         self.iterations += 1
 
-#NOTE: UPDATE DOCSTRINGS 
 class AdagradOptimiser:
     """
     Adagrad optimiser class. One of the optimisers that could be implemented during training.
@@ -778,7 +784,6 @@ class AdagradOptimiser:
         self.iterations += 1
 
 
-#NOTE: UPDATE DOCSTRING
 class RMSPropOptimiser:
     """
     RMSProp optimiser class. One of the optimisers that could be implemented during training.
@@ -805,7 +810,7 @@ class RMSPropOptimiser:
         """
         Updates the current learning rate based on decay, if applicable.
 
-        This method adjusts the learning rate befor the parameter updates occur according to the relevant RMSProp equations and the decay parameter.
+        This method adjusts the learning rate before the parameter updates occur according to the relevant RMSProp equations and the decay parameter.
         """
         if self.decay:
             self.current_learning_rate = self.learning_rate * (
@@ -938,7 +943,7 @@ class Accuracy:
     
     def __init__(self): 
         """
-        NOTE: Fill this out. 
+        Intialises key values for Accuracy class.
         """
         self.accumulated_sum = 0.0
         self.accumulated_count = 0
@@ -984,7 +989,7 @@ class RegressionAccuracy(Accuracy):
     """Accuracy metric for regression tasks using threshold-based comparison."""
     
     def __init__(self):
-        """NOTE: Fill out"""
+        """Initialises key values from parent class Accuracy."""
         super().__init__()
         self.precision = None
 
@@ -1291,7 +1296,7 @@ class Model:
         true_labels: Ground truth labels for gradient calculation. 
         """
 
-        if self.softmax_classifier_output:  # Need to check if the softmax classifier is being used in the model
+        if self.softmax_classifier_output:  # Checks if the softmax classifier is being used in the model
 
             self.softmax_classifier_output.backward_pass(predictions, true_labels)
 
@@ -1332,7 +1337,7 @@ class Model:
             pickle.dump(model, file)
 
     @staticmethod #This must be a static method as you should be able to use it without instantiating an object of the Model class. 
-    def load(file_path: str) -> "Model": #NOTE: Need to fix this as well. Can't seem to return a Model class data type. 
+    def load(file_path: str) -> "Model": 
         """
         Deserialise model from storage. 
         

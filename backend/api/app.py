@@ -7,14 +7,14 @@ from backend.neural_network.letter_recognition.asl_detector import ASLPredictor
 from backend.neural_network.clothing_recognition.clothing_detector import ClothingPredictor
 
 
-from backend.config import ASL_MODEL_PATH, ASL_LABELS, BUFFER_SIZE, CONSENSUS_THRESHOLD, PROCESSING_SIZE, CLOTHING_MODEL_PATH, CLOTHING_LABELS
+from backend.config import ASL_MODEL_PATH, ASL_LABELS, BUFFER_SIZE, CONSENSUS_THRESHOLD, ASL_IMAGE_HEIGHT, CLOTHING_MODEL_PATH, CLOTHING_LABELS
 
 app = Flask(__name__)
 CORS(app)
 
 translator = Translator()
 asl_model = tensorflow.keras.models.load_model(ASL_MODEL_PATH)
-asl_predictor = ASLPredictor(model=asl_model, buffer_size=BUFFER_SIZE, consensus_threshold=CONSENSUS_THRESHOLD, processing_size=PROCESSING_SIZE, asl_labels=ASL_LABELS)
+asl_predictor = ASLPredictor(model=asl_model, buffer_size=BUFFER_SIZE, consensus_threshold=CONSENSUS_THRESHOLD, processing_size=ASL_IMAGE_HEIGHT, asl_labels=ASL_LABELS)
 clothing_predictor = ClothingPredictor(model_path=CLOTHING_MODEL_PATH, labels=CLOTHING_LABELS)
 
 @app.route("/api/predictLetter", methods=["POST"])

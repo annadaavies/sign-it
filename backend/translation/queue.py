@@ -83,7 +83,7 @@ class Queue:
         
         return None
     
-    def items(self) -> list: #TODO: For function type hints, this returns a list (of any data type), can't seem to do -> list[any] or -> list?
+    def items(self) -> list: 
         """
         Retrieve all elements in the queue as a list. 
         

@@ -3,7 +3,6 @@ import numpy
 import base64
 
 from backend.neural_network.clothing_recognition.neural_network import Model
-from backend.config import CLOTHING_MODEL_PATH, CLOTHING_LABELS
 
 class ClothingPredictor: 
     """

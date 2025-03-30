@@ -1,4 +1,4 @@
-MAX_DICTIONARY_SIZE = 1000
+from backend.config import MAX_DICTIONARY_SIZE
 
 class DictionaryEntry: 
     """
@@ -95,12 +95,16 @@ class Dictionary:
         
         return None
     
-    def remove(self, key: str) -> bool: 
+    def remove(self, key: str) -> "bool | None": 
         """
         Remove key-value pair from dictionary. 
         
         Args: 
-        TODO: Finish doc string for this function!!!
+        key: Unique identifier for the entry to be removed. 
+        
+        Returns: 
+        None: If the key exists in the dictionary, its key-value pair will be removed, with nothing being returned. 
+        bool: If the key does not exist in the dictionary, it cannot be removed, hence False is returned.  
         """
         index = self.hash(key) 
         current = self.table[index]

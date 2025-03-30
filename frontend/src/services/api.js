@@ -2,6 +2,7 @@ import axios from "axios";
 
 const API_BASE = "http://localhost:5000/api";
 
+//This is defined as a standard function rather than an export function as it is only intended for internal use within the module.
 function parseDictionaryEntry(entryArray) {
   const parsedObject = {};
   entryArray.forEach((item) => {
@@ -10,6 +11,7 @@ function parseDictionaryEntry(entryArray) {
   return parsedObject;
 }
 
+//The export const functions are 'arrow' functions and designed to be exported immediately. They make up the module's public API for other parts of the application.
 export const translateText = async (text) => {
   try {
     const response = await axios.post(`${API_BASE}/translateText`, { text });
